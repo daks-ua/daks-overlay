@@ -1,0 +1,14 @@
+# ChangeLog for app-office/1C_Enterprise-common
+# Copyright 2002-2008 Gentoo Foundation; Distributed under the GPL v2
+
+*app-office/1C_Enterprise-common-8.1.13
+
+  13 May 2009; Kazankov Alexandr <johnrdoe63@cregion.ru>
+  Some cosmetic fixes.
+  Version bump.
+  Add x86_64 support..
+
+*app-office/1C_Enterprise-common-8.1.5-r1
+
+  12 May 2009; Kazankov Alexandr <johnrdoe63@cregion.ru>
+  Initial import form AnViar repo.
