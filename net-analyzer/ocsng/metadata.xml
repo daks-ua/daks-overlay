@@ -6,4 +6,8 @@
 		<email>daks12@gmail.com</email>
 		<name>Dmitry 'daks' Fomenko</name>
 	</maintainer>
+	<use>
+		<flag name="admin">Install Administration server</flag>
+		<flag name="comm">Install Communication server</flag>
+	</use>
 </pkgmetadata>
