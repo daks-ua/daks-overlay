@@ -1,8 +1,0 @@
-# Copyright 1999-2011 Gentoo Foundation.
-# Distributed under the terms of the GNU General Public License v2
-# $Header: $
-# This file contains descriptions of local USE flags, and the ebuilds which
-# contain them.
-
-net-analyzer/ocsng:admin - Install Administration server
-net-analyzer/ocsng:comm - Install Communication server
