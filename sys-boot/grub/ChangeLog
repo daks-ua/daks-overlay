@@ -1,0 +1,10 @@
+# ChangeLog for grub
+# Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*grub-1.99_rc1-r1.ebuild (27 Jul 2011)
+
+  27 Jul 2011; Dmitry 'daks' Fomenko <daks12@gmail.com> grub-1.99_rc1-r1.ebuild,
+  files/defaults, files/grub-1.99-genkernel.patch, files/grub-1.99-limits.patch,
+  files/grub-1.99-old_gcc.patch:
+  Ebuild with patches for work on hardened profile.
