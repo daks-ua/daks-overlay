@@ -9,5 +9,6 @@
 	<use>
 		<flag name="admin">Install Administration server</flag>
 		<flag name="comm">Install Communication server</flag>
+		<flag name="logrotate">Install support files for app-admin/logrotate</flag>
 	</use>
 </pkgmetadata>
