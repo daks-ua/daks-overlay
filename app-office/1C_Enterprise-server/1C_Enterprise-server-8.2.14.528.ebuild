@@ -11,20 +11,24 @@ HOMEPAGE="http://v8.1c.ru/"
 MY_PV="$(replace_version_separator 3 '-' )"
 MY_PN="1C_Enterprise82-server"
 
-SRC_URI="x86? ( ${MY_PN}-${MY_PV}.i386.rpm )
-        amd64? ( ${MY_PN}-${MY_PV}.x86_64.rpm )"
+SRC_URI="x86? ( ${MY_PN}-${MY_PV}.i386.rpm
+	    nls? ( ${MY_PN}-nls-${MY_PV}.i386.rpm ) )
+        amd64? ( ${MY_PN}-${MY_PV}.x86_64.rpm
+	    nls? ( ${MY_PN}-nls-${MY_PV}.x86_64.rpm ) )"
 
 SLOT="$(get_version_component_range 1-2)"
 LICENSE="1CEnterprise_en"
 KEYWORDS="amd64 x86"
 RESTRICT="fetch strip"
 
-IUSE="postgresql fontconfig"
+IUSE="postgresql +fontconfig +nls"
 
 RDEPEND="~app-office/1C_Enterprise-common-${PV}:${SLOT}
 	postgresql? ( dev-db/postgresql-server[1c,pg_legacytimestamp] )
 	fontconfig? ( gnome-extra/libgsf
-			app-text/ttf2pt1 ) "
+			app-text/ttf2pt1
+			media-gfx/imagemagick
+			dev-db/unixODBC ) "
 
 DEPEND="${RDEPEND}"
 
