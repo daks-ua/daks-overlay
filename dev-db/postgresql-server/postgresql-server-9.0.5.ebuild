@@ -60,13 +60,16 @@ pkg_setup() {
 
 src_prepare() {
 	epatch "${WORKDIR}/autoconf.patch" "${WORKDIR}/bool.patch" \
-		"${WORKDIR}/pg_ctl-exit-status.patch" "${WORKDIR}/server.patch" \
-		"${FILESDIR}/1c_postgresql-9.0-logging.patch" \
-		"${FILESDIR}/1c_postgresql-perl-rpath.patch" \
-		"${FILESDIR}/1c_postgresql-prefer-ncurses.patch" \
-		"${FILESDIR}/1c_FULL_90-0.20.1.patch" \
-		"${FILESDIR}/1c_postgresql-9.0-configs-server.patch" \
-		"${FILESDIR}/1c_postgresql-9.0-applock.patch"  || die "1c patch set failed"
+		"${WORKDIR}/pg_ctl-exit-status.patch" "${WORKDIR}/server.patch"
+
+	if use 1c ; then
+		epatch"${FILESDIR}/1c_postgresql-9.0-logging.patch" \
+		    "${FILESDIR}/1c_postgresql-perl-rpath.patch" \
+		    "${FILESDIR}/1c_postgresql-prefer-ncurses.patch" \
+		    "${FILESDIR}/1c_FULL_90-0.20.1.patch" \
+		    "${FILESDIR}/1c_postgresql-9.0-configs-server.patch" \
+		    "${FILESDIR}/1c_postgresql-9.0-applock.patch"  || die "1c patch set failed"
+	fi
 
 	eprefixify src/include/pg_config_manual.h
 

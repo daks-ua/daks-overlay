@@ -63,7 +63,7 @@ src_prepare() {
 	epatch "${WORKDIR}/autoconf.patch" \
 		"${WORKDIR}/base.patch" || die "epatch failed"
 
-	if use 1c ; then 
+	if use 1c ; then
 	    epatch "${FILESDIR}/1c_postgresql-9.0-logging.patch" \
 		"${FILESDIR}/1c_postgresql-perl-rpath.patch" \
 		"${FILESDIR}/1c_postgresql-prefer-ncurses.patch" \

@@ -63,13 +63,16 @@ PDEPEND="doc? ( ~dev-db/postgresql-docs-${PV} )"
 
 src_prepare() {
 	epatch "${WORKDIR}/autoconf.patch" "${WORKDIR}/base.patch" \
-		"${WORKDIR}/bool.patch" \
-		"${FILESDIR}/1c_postgresql-9.0-logging.patch" \
+		"${WORKDIR}/bool.patch"
+
+	if use 1c ; then 
+		epatch "${FILESDIR}/1c_postgresql-9.0-logging.patch" \
 		"${FILESDIR}/1c_postgresql-perl-rpath.patch" \
 		"${FILESDIR}/1c_postgresql-prefer-ncurses.patch" \
 		"${FILESDIR}/1c_FULL_90-0.20.1.patch" \
 		"${FILESDIR}/1c_postgresql-9.0-r1-configs.patch" \
 		"${FILESDIR}/1c_postgresql-9.0-applock.patch" || die "1c patch set failed"
+	fi
 
 	eprefixify src/include/pg_config_manual.h
 
