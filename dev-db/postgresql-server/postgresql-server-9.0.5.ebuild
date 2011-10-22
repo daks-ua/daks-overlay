@@ -63,7 +63,7 @@ src_prepare() {
 		"${WORKDIR}/pg_ctl-exit-status.patch" "${WORKDIR}/server.patch"
 
 	if use 1c ; then
-		epatch"${FILESDIR}/1c_postgresql-9.0-logging.patch" \
+		epatch "${FILESDIR}/1c_postgresql-9.0-logging.patch" \
 		    "${FILESDIR}/1c_postgresql-perl-rpath.patch" \
 		    "${FILESDIR}/1c_postgresql-prefer-ncurses.patch" \
 		    "${FILESDIR}/1c_FULL_90-0.20.1.patch" \
