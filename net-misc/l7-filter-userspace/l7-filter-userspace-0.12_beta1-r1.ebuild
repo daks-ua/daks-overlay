@@ -6,7 +6,7 @@ EAPI="4"
 
 WANT_AUTOCONF="2.5"
 
-inherit eutils autotools versionator
+inherit eutils autotools versionator linux-mod
 
 MY_PV="$(replace_version_separator 2 '-')"
 DESCRIPTION="Userspace utilities for layer 7 iptables QoS"
@@ -22,6 +22,9 @@ DEPEND=">=net-libs/libnetfilter_conntrack-0.0.100
 RDEPEND="net-misc/l7-protocols
 		${DEPEND}"
 S="${WORKDIR}/${PN}-${MY_PV}"
+DOCS=(README TODO BUGS THANKS AUTHORS sample-l7-filter.conf)
+
+CONFIG_CHECK="~NF_CT_NETLINK"
 
 src_prepare() {
 	epatch "${FILESDIR}/${P}-libnetfilter_conntrack-0.0.100.patch" \
@@ -29,6 +32,6 @@ src_prepare() {
 }
 
 src_install() {
+	default
 	emake DESTDIR="${D}" install || die
-	dodoc README TODO BUGS THANKS AUTHORS sample-l7-filter.conf
 }
