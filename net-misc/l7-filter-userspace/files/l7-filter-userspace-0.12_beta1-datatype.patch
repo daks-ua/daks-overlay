@@ -1,0 +1,12 @@
+diff -Naur l7-filter-userspace-0.12-beta1_orig/l7-queue.cpp l7-filter-userspace-0.12-beta1/l7-queue.cpp
+--- l7-filter-userspace-0.12-beta1_orig/l7-queue.cpp	2011-01-25 19:15:54.000000000 +0200
++++ l7-filter-userspace-0.12-beta1/l7-queue.cpp	2012-01-12 13:31:51.552494567 +0200
+@@ -196,7 +196,7 @@
+   ifi = nfq_get_outdev(tb);
+   if(ifi) l7printf(4, "outdev = %d ", ifi);
+ 
+-  ret = nfq_get_payload(tb, &data);
++  ret = nfq_get_payload(tb, (unsigned char**)&data);
+   if(ret >= 0) l7printf(4, "payload_len = %d\n", ret);
+   
+   char ip_protocol = data[9];
