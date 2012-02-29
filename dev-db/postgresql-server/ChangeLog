@@ -1,0 +1,10 @@
+# ChangeLog for x11-plugins/obvious
+# Copyright 2011-2012 Gentoo Foundation; Distributed under the GPL v3
+# $Header: $
+
+*postgresql-server-9.0.7 (29 Feb 2012)
+
+  29 Feb 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +postgresql-server-9.0.7.ebuild, +ChangeLog, +metadata.xml:
+  Bump version. Add kernel.shmmax check. Add ChangeLog
+  and metadata.xml.
