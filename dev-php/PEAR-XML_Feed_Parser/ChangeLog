@@ -1,0 +1,9 @@
+# ChangeLog for dev-php/PEAR-XML_Feed_Parser
+# Copyright 2012 Gentoo Foundation; Distributed under the GPL v3
+# $Header: $
+
+*PEAR-XML_Feed_Parser-1.0.3 (29 Mar 2012)
+
+  29 Mar 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +PEAR-XML_Feed_Parser-1.0.3.ebuild, +ChangeLog, +metadata.xml:
+  added from #258604 for www-apps/egroupware.

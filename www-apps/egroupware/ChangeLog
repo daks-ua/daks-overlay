@@ -1,0 +1,9 @@
+# ChangeLog for www-apps/egroupware
+# Copyright 2012 Gentoo Foundation; Distributed under the GPL v3
+# $Header: $
+
+*www-apps/egroupware-1.8.002.20111111 (29 Mar 2012)
+
+  29 Mar 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +www-apps/egroupware-1.8.002.20111111.ebuild, +ChangeLog, +metadata.xml:
+  added from #342003.
