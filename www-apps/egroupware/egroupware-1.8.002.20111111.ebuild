@@ -28,7 +28,7 @@ IUSE="ldap mssql mysql postgres gallery phpfreechat jpgraph"
 
 #hint: sqlite needed for calendar
 RDEPEND="
-	dev-lang/php[ctype,imap,ldap?,mssql?,mysql?,pdo,postgres?,session,sqlite3,unicode]
+	dev-lang/php[ctype,imap,ldap?,mssql?,mysql?,pdo,postgres?,session,sqlite3,unicode,xmlreader]
 	|| (
 		dev-lang/php[gd]
 		dev-lang/php[gd-external]
@@ -37,6 +37,7 @@ RDEPEND="
 	dev-php/PEAR-PEAR
 	dev-php/PEAR-XML_Feed_Parser
 	virtual/cron
+	net-mail/tnef
    jpgraph? ( dev-php/jpgraph )
 "
 #	>dev-php5/jpgraph-1.13
@@ -51,14 +52,10 @@ src_prepare() {
 	esvn_clean
 
    if use jpgraph; then
-   	einfo "Fixing jpgraph location"
-   	MY_JPGRAPH_VERSION="$(best_version dev-php5/jpgraph)"
-   	MY_JPGRAPH_VERSION="${MY_JPGRAPH_VERSION/'dev-php5/jpgraph-'/}"
-   	sed -i "s|EGW_SERVER_ROOT . '/../jpgraph/src/jpgraph.php'|'/usr/share/php5/jpgraph/jpgraph.php'|" \
-   		projectmanager/inc/class.projectmanager_ganttchart.inc.php || die
-   	sed -i "s|EGW_SERVER_ROOT . '/../jpgraph/src/jpgraph_gantt.php'|'/usr/share/php5/jpgraph/jpgraph_gantt.php'|" \
-   		projectmanager/inc/class.projectmanager_ganttchart.inc.php || die
-   	sed -i "s|$jpgraph_path .= SEP.'jpgraph';|$jpgraph_path = dirname('/usr/share/php5/jpgraph/jpgraph.php');|" \
+#   	einfo "Fixing jpgraph issues."
+   	MY_JPGRAPH_VERSION="$(best_version dev-php/jpgraph)"
+   	MY_JPGRAPH_VERSION="${MY_JPGRAPH_VERSION/'dev-php/jpgraph-'/}"
+   	sed -i "s|$jpgraph_path .= SEP.'jpgraph';|$jpgraph_path = dirname('/usr/share/php/jpgraph/jpgraph.php');|" \
    		setup/check_install.php || die
    	sed -i "s|'unknown';|'${MY_JPGRAPH_VERSION}';\n         \$available = version_compare(\$version,\$min_version,'>=');|" \
    		setup/check_install.php || die
