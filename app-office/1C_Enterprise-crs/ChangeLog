@@ -1,6 +1,21 @@
 # ChangeLog for app-office/1C_Enterprise-crs
 # Copyright 2002-2012 Gentoo Foundation; Distributed under the GPL v2
 
+*app-office/1C_Enterprise-crs-8.2.15.301
+
+  05 Apr 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>,
+  -1C_Enterprise-crs-8.2.13.202.ebuild,
+  -1C_Enterprise-crs-8.2.14.528.ebuild,
+  -1C_Enterprise-crs-8.2.14.533.ebuild,
+  -1C_Enterprise-crs-8.2.14.537.ebuild,
+  -1C_Enterprise-crs-8.2.14.540.ebuild,
+  -1C_Enterprise-crs-8.2.15.289.ebuild,
+  -1C_Enterprise-crs-8.2.15.294.ebuild,
+  +1C_Enterprise-crs-8.2.13.219.ebuild,
+  +1C_Enterprise-crs-8.2.14.540-r1.ebuild,
+  +1C_Enterprise-crs-8.2.15.301.ebuild:
+  Version bump. Sanitize old ebuilds.
+
 *app-office/1C_Enterprise-crs-8.2.15.294
 
   21 Feb 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>,

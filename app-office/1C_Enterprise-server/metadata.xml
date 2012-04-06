@@ -9,4 +9,7 @@
 	<longdescription lang="ru">
 		Серверная часть ERP системы компании 1С
 	</longdescription>
+	<use>
+		<flag name='pax_kernel'>Make this package work on PAX kernels</flag>
+	</use>
 </pkgmetadata>

@@ -7,6 +7,9 @@
 		<name>Dmitry 'daks' Fomenko</name>
 	</maintainer>
 	<longdescription lang="ru">
-		Веб-компонент ERP системы компании 1С
+		Веб-компонента ERP системы компании 1С
 	</longdescription>
+	<use>
+		<flag name='pax_kernel'>Make this package work on PAX kernels</flag>
+	</use>
 </pkgmetadata>
