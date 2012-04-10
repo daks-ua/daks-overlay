@@ -1,4 +1,4 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-db/postgresql-server/postgresql-server-9.0.3-r3.ebuild,v 1.1 2011/03/27 01:38:27 titanofold Exp $
 
@@ -56,7 +56,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-        epatch "${WORKDIR}/server.patch" \
+	epatch "${WORKDIR}/server.patch" \
 		"${WORKDIR}/autoconf.patch" || die "epatch failed"
 
 	if use 1c ; then

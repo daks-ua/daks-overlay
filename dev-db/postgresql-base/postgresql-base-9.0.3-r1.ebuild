@@ -1,6 +1,6 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-db/postgresql-base/postgresql-base-9.0.3-r1.ebuild,v 1.2 2011/03/22 11:08:41 titanofold Exp $
+# $Header: $
 
 EAPI="3"
 
@@ -71,7 +71,6 @@ src_prepare() {
 		"${FILESDIR}/1c_postgresql-9.0-r1-configs.patch" \
 		"${FILESDIR}/1c_postgresql-9.0-applock.patch" || die "1c patch set failed"
 	fi
-
 
 	eprefixify src/include/pg_config_manual.h
 

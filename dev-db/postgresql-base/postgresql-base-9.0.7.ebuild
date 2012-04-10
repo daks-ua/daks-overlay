@@ -41,17 +41,17 @@ wanted_languages() {
 }
 
 RDEPEND=">=app-admin/eselect-postgresql-1.0.7
-		 virtual/libintl
-		 !!dev-db/libpq
-		 !!dev-db/postgresql
-		 !!dev-db/postgresql-client
-		 !!dev-db/postgresql-libs
-		 kerberos? ( virtual/krb5 )
-		 ldap? ( net-nds/openldap )
-		 pam? ( virtual/pam )
-		 readline? ( sys-libs/readline )
-		 ssl? ( >=dev-libs/openssl-0.9.6-r1 )
-		 zlib? ( sys-libs/zlib )"
+		virtual/libintl
+		!!dev-db/libpq
+		!!dev-db/postgresql
+		!!dev-db/postgresql-client
+		!!dev-db/postgresql-libs
+		kerberos? ( virtual/krb5 )
+		ldap? ( net-nds/openldap )
+		pam? ( virtual/pam )
+		readline? ( sys-libs/readline )
+		ssl? ( >=dev-libs/openssl-0.9.6-r1 )
+		zlib? ( sys-libs/zlib )"
 
 DEPEND="${RDEPEND}
 		sys-devel/bison

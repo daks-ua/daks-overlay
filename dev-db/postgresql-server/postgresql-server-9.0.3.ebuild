@@ -1,4 +1,4 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-db/postgresql-server/postgresql-server-9.0.3.ebuild,v 1.3 2011/02/05 11:46:16 fauli Exp $
 
@@ -63,12 +63,12 @@ pkg_setup() {
 src_prepare() {
 	epatch "${FILESDIR}/postgresql-${SLOT}-common.3.patch" \
 		"${FILESDIR}/postgresql-${SLOT}-server.3.patch" \
-                "${FILESDIR}/1c_postgresql-9.0-logging.patch" \
-                "${FILESDIR}/1c_postgresql-perl-rpath.patch" \
-                "${FILESDIR}/1c_postgresql-prefer-ncurses.patch" \
-                "${FILESDIR}/1c_FULL_90-0.19.patch" \
-                "${FILESDIR}/1c_postgresql-9.0-configs-server.patch" \
-                "${FILESDIR}/1c_postgresql-9.0-applock.patch" || die "epatch failed"
+		"${FILESDIR}/1c_postgresql-9.0-logging.patch" \
+		"${FILESDIR}/1c_postgresql-perl-rpath.patch" \
+		"${FILESDIR}/1c_postgresql-prefer-ncurses.patch" \
+		"${FILESDIR}/1c_FULL_90-0.19.patch" \
+		"${FILESDIR}/1c_postgresql-9.0-configs-server.patch" \
+		"${FILESDIR}/1c_postgresql-9.0-applock.patch" || die "epatch failed"
 
 	if use test; then
 		sed -e "s|/no/such/location|${S}/src/test/regress/tmp_check/no/such/location|g" -i src/test/regress/{input,output}/tablespace.source

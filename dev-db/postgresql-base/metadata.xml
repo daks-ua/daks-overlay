@@ -8,5 +8,10 @@
 	</maintainer>
 	<use>
 		<flag name='1c'>Apply patchset for work with 1C:Enterprise ERP system</flag>
+		<flag name='pg-intdatetime'>Enable --enable-integer-datetimes configure
+			option, which changes PG to use 64-bit integers for timestamp storage</flag>
+		<flag name='pg_legacytimestamp'>Use double precision floating-point numbers
+			instead of 64-bit integers for timestamp storage.
+		</flag>
 	</use>
 </pkgmetadata>

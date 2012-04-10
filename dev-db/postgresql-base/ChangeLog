@@ -1,9 +1,19 @@
-# ChangeLog for x11-plugins/obvious
-# Copyright 2011-2012 Gentoo Foundation; Distributed under the GPL v3
+# ChangeLog for postgresql-base
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v3
 # $Header: $
+
+*postgresql-base-9.0.3-r2 (10 Apr 2012)
+*postgresql-base-9.0.5-r1 (10 Apr 2012)
+*postgresql-base-9.0.7-r1 (10 Apr 2012)
+
+  10 Apr 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +postgresql-base-9.0.3-r2.ebuild, +postgresql-base-9.0.5-r1.ebuild,
+  +postgresql-base-9.0.7-r1.ebuild, -postgresql-base-9.0.3.ebuild:
+  Added dev-libs/icu to depends when the 1c USE flag is enabled.
+  Thanks to Andrew Hazzan for reporting. Minor clean ups.
 
 *postgresql-base-9.0.7 (29 Feb 2012)
 
   29 Feb 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
-  +postgresql-abse-9.0.7.ebuild, +ChangeLog, +metadata.xml:
+  +postgresql-base-9.0.7.ebuild, +ChangeLog, +metadata.xml:
   Bump version. Add ChangeLog and metadata.xml.

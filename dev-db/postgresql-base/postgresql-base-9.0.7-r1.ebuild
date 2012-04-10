@@ -10,12 +10,12 @@ inherit autotools eutils flag-o-matic multilib prefix versionator
 
 SLOT="$(get_version_component_range 1-2)"
 
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~sparc-fbsd ~x86-fbsd ~ppc-macos ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~sparc-fbsd ~x86-fbsd ~ppc-macos ~x86-solaris"
 
 DESCRIPTION="PostgreSQL libraries and clients"
 HOMEPAGE="http://www.postgresql.org/"
 SRC_URI="mirror://postgresql/source/v${PV}/postgresql-${PV}.tar.bz2
-		 http://dev.gentoo.org/~titanofold/postgresql-patches-${SLOT}-r2.tbz2"
+		 http://dev.gentoo.org/~titanofold/postgresql-patches-9.0-r3.tbz2"
 LICENSE="POSTGRESQL"
 
 S="${WORKDIR}/postgresql-${PV}"
@@ -51,27 +51,34 @@ RDEPEND=">=app-admin/eselect-postgresql-1.0.7
 		pam? ( virtual/pam )
 		readline? ( sys-libs/readline )
 		ssl? ( >=dev-libs/openssl-0.9.6-r1 )
-		zlib? ( sys-libs/zlib )"
+		zlib? ( sys-libs/zlib )
+		1c? ( dev-libs/icu )"
 
 DEPEND="${RDEPEND}
 		sys-devel/bison
 		sys-devel/flex
-		>=sys-apps/sandbox-2.0
+		!!<sys-apps/sandbox-2.0
 		nls? ( sys-devel/gettext )"
 
 PDEPEND="doc? ( ~dev-db/postgresql-docs-${PV} )"
 
+REQUIRED_USE="1c? ( pg_legacytimestamp )"
+
+# Support /var/run or /run for the socket directory
+[[ ! -d /run ]] && RUNDIR=/var
+
 src_prepare() {
-	epatch "${WORKDIR}/autoconf.patch" "${WORKDIR}/base.patch" \
+	epatch "${WORKDIR}/autoconf.patch" \
+		"${WORKDIR}/base.patch" \
 		"${WORKDIR}/bool.patch"
 
 	if use 1c ; then
 		epatch "${FILESDIR}/1c_postgresql-9.0-logging.patch" \
-		"${FILESDIR}/1c_postgresql-perl-rpath.patch" \
-		"${FILESDIR}/1c_postgresql-prefer-ncurses.patch" \
-		"${FILESDIR}/1c_FULL_90-0.20.1.patch" \
-		"${FILESDIR}/1c_postgresql-9.0-r1-configs.patch" \
-		"${FILESDIR}/1c_postgresql-9.0-applock.patch" || die "1c patch set failed"
+		    "${FILESDIR}/1c_postgresql-perl-rpath.patch" \
+		    "${FILESDIR}/1c_postgresql-prefer-ncurses.patch" \
+		    "${FILESDIR}/1c_FULL_90-0.20.1.patch" \
+		    "${FILESDIR}/1c_postgresql-9.0-r1-configs.patch" \
+		    "${FILESDIR}/1c_postgresql-9.0-applock.patch"
 	fi
 
 	eprefixify src/include/pg_config_manual.h
@@ -80,7 +87,11 @@ src_prepare() {
 	rm "${S}/src/backend/nls.mk"
 
 	# because psql/help.c includes the file
-	ln -s "${S}/src/include/libpq/pqsignal.h" "${S}/src/bin/psql/" || die
+	ln -s "${S}/src/include/libpq/pqsignal.h" "${S}/src/bin/psql/"
+
+	sed -e "s|@RUNDIR@|${RUNDIR}|g" \
+		-i src/include/pg_config_manual.h || \
+		die "RUNDIR sed failed"
 
 	eautoconf
 }
