@@ -1,0 +1,47 @@
+diff -urN portage-2.2.0_alpha100-orig/bin/phase-functions.sh portage-2.2.0_alpha100/bin/phase-functions.sh
+--- portage-2.2.0_alpha100-orig/bin/phase-functions.sh	2012-03-23 06:36:36 +0900
++++ portage-2.2.0_alpha100/bin/phase-functions.sh	2012-04-07 02:51:21 +0900
+@@ -246,6 +246,21 @@
+ 	ebuild_phase pre_src_unpack
+ 	vecho ">>> Unpacking source..."
+ 	ebuild_phase src_unpack
++	if [ "${EAPI-0}" -lt 2 -a -n "${PORTAGE_PATCHDIR}" -a -d "${PORTAGE_PATCHDIR}/${CATEGORY}/${PN}" ]; then
++		if [ "$(type -t epatch)" == "function" ]; then (
++			vecho ">>> Applying custom patches..."
++			cd "$S"
++			for patch in "${PORTAGE_PATCHDIR}/${CATEGORY}/${PN}"/* \
++	                             "${PORTAGE_PATCHDIR}/${CATEGORY}/${PN}/${PV}"/*; do
++				[ -f "${patch}" ] || continue
++				# *.patch files are handled by Portage itself.
++				if echo "${patch}" | grep -q '\.patch$'; then continue; fi
++				epatch "${patch}" || die "Failed to apply patch ${patch}"
++			done
++		); else
++			ewarn "Cannot apply custom patches because eutils.eclass is not inherited by the ebuild."
++		fi
++	fi
+ 	>> "$PORTAGE_BUILDDIR/.unpacked" || \
+ 		die "Failed to create $PORTAGE_BUILDDIR/.unpacked"
+ 	vecho ">>> Source unpacked in ${WORKDIR}"
+@@ -377,6 +392,21 @@
+ 	ebuild_phase pre_src_prepare
+ 	vecho ">>> Preparing source in $PWD ..."
+ 	ebuild_phase src_prepare
++	if [ "${EAPI-0}" -ge 2 -a -n "${PORTAGE_PATCHDIR}" -a -d "${PORTAGE_PATCHDIR}/${CATEGORY}/${PN}" ]; then
++		if [ "$(type -t epatch)" == "function" ]; then (
++			vecho ">>> Applying custom patches..."
++			cd "$S"
++			for patch in "${PORTAGE_PATCHDIR}/${CATEGORY}/${PN}"/* \
++	                             "${PORTAGE_PATCHDIR}/${CATEGORY}/${PN}/${PV}"/*; do
++				[ -f "${patch}" ] || continue
++				# *.patch files are handled by Portage itself.
++				if echo "${patch}" | grep -q '\.patch$'; then continue; fi
++				epatch "${patch}" || die "Failed to apply patch ${patch}"
++			done
++		); else
++			ewarn "Cannot apply custom patches because eutils.eclass is not inherited by the ebuild."
++		fi
++	fi
+ 	>> "$PORTAGE_BUILDDIR/.prepared" || \
+ 		die "Failed to create $PORTAGE_BUILDDIR/.prepared"
+ 	vecho ">>> Source prepared."
