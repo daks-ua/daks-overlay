@@ -1,0 +1,11 @@
+# ChangeLog for profile directory
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+#
+# This ChangeLog should include records for all changes in profiles directory.
+# Only typo fixes which don't affect portage/repoman behaviour could be avoided
+# here. If in doubt put a record here!
+
+  04 May 2012; Dmitry 'daks' Fomenko <daks12@gmail.com> package.mask:
+  sys-apps/portage-2.2*: Masked because of early experimental stage of patch for
+  autopatching.
