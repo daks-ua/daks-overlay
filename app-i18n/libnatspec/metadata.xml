@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-<herd>no-herd</herd>
 <longdescription>
 LIBNATSPEC is a collection of functions for requiest various charsets and locales for host system and for other system. The library allows applications to be written that are locale and system independent.
 </longdescription
