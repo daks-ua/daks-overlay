@@ -1,21 +1,21 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Header: /var/cvsroot/gentoo-x86/dev-db/postgresql-base/postgresql-base-8.4.11.ebuild,v 1.9 2012/04/08 14:48:23 armin76 Exp $
 
 EAPI="4"
 
 WANT_AUTOMAKE="none"
 
-inherit autotools eutils flag-o-matic multilib prefix versionator
+inherit autotools eutils multilib prefix versionator
 
 SLOT="$(get_version_component_range 1-2)"
 
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~sparc-fbsd ~x86-fbsd ~ppc-macos ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~sparc-fbsd ~x86-fbsd"
 
 DESCRIPTION="PostgreSQL libraries and clients"
 HOMEPAGE="http://www.postgresql.org/"
 SRC_URI="mirror://postgresql/source/v${PV}/postgresql-${PV}.tar.bz2
-		 http://dev.gentoo.org/~titanofold/postgresql-patches-${SLOT}-r2.tbz2"
+		 http://dev.gentoo.org/~titanofold/postgresql-patches-8.4-r2.tbz2"
 LICENSE="POSTGRESQL"
 
 S="${WORKDIR}/postgresql-${PV}"
@@ -24,7 +24,7 @@ S="${WORKDIR}/postgresql-${PV}"
 RESTRICT="test"
 
 LINGUAS="af cs de en es fa fr hr hu it ko nb pl pt_BR ro ru sk sl sv tr zh_CN zh_TW"
-IUSE="1c doc kerberos ldap nls pam pg_legacytimestamp readline ssl threads zlib"
+IUSE="doc kerberos ldap nls pam pg_legacytimestamp readline ssl threads zlib"
 
 for lingua in ${LINGUAS} ; do
 	IUSE+=" linguas_${lingua}"
@@ -49,30 +49,26 @@ RDEPEND=">=app-admin/eselect-postgresql-1.0.7
 		kerberos? ( virtual/krb5 )
 		ldap? ( net-nds/openldap )
 		pam? ( virtual/pam )
-		readline? ( sys-libs/readline )
+		readline? ( >=sys-libs/readline-4.1 )
 		ssl? ( >=dev-libs/openssl-0.9.6-r1 )
-		zlib? ( sys-libs/zlib )"
+		zlib? ( >=sys-libs/zlib-1.1.3 )
+		1c? ( dev-libs/icu )"
 
 DEPEND="${RDEPEND}
-		sys-devel/bison
+		!!<sys-apps/sandbox-2.0
+		>=sys-devel/bison-1.875
 		sys-devel/flex
-		>=sys-apps/sandbox-2.0
 		nls? ( sys-devel/gettext )"
 
 PDEPEND="doc? ( ~dev-db/postgresql-docs-${PV} )"
 
+# Support /var/run or /run for the socket directory
+[[ ! -d /run ]] && RUNDIR=/var
+
 src_prepare() {
 	epatch "${WORKDIR}/autoconf.patch" "${WORKDIR}/base.patch" \
-		"${WORKDIR}/bool.patch"
-
-	if use 1c ; then
-		epatch "${FILESDIR}/1c_postgresql-9.0-logging.patch" \
-		"${FILESDIR}/1c_postgresql-perl-rpath.patch" \
-		"${FILESDIR}/1c_postgresql-prefer-ncurses.patch" \
-		"${FILESDIR}/1c_FULL_90-0.20.1.patch" \
-		"${FILESDIR}/1c_postgresql-9.0-r1-configs.patch" \
-		"${FILESDIR}/1c_postgresql-9.0-applock.patch" || die "1c patch set failed"
-	fi
+		"${WORKDIR}/bool.patch" "${WORKDIR}/darwin.patch" \
+		"${WORKDIR}/SuperH.patch"
 
 	eprefixify src/include/pg_config_manual.h
 
@@ -82,17 +78,15 @@ src_prepare() {
 	# because psql/help.c includes the file
 	ln -s "${S}/src/include/libpq/pqsignal.h" "${S}/src/bin/psql/" || die
 
+	sed -e "s|@RUNDIR@|${RUNDIR}|g" \
+		-i src/include/pg_config_manual.h || \
+		die "RUNDIR sed failed"
+
 	eautoconf
 }
 
 src_configure() {
-	case ${CHOST} in
-		*-darwin*|*-solaris*)
-			use nls && append-libs intl
-		;;
-	esac
 	export LDFLAGS_SL="${LDFLAGS}"
-	export LDFLAGS_EX="${LDFLAGS}"
 	local PO="${EPREFIX%/}"
 	econf --prefix="${PO}/usr/$(get_libdir)/postgresql-${SLOT}" \
 		--datadir="${PO}/usr/share/postgresql-${SLOT}" \
@@ -108,7 +102,7 @@ src_configure() {
 		$(use_with ldap) \
 		"$(use_enable nls nls "$(wanted_languages)")" \
 		$(use_with pam) \
-		$(use_enable !pg_legacytimestamp integer-datetimes) \
+		$(use_enable !pg_legacytimestamp integer-datetimes ) \
 		$(use_with readline) \
 		$(use_with ssl openssl) \
 		$(use_enable threads thread-safety) \
@@ -127,9 +121,8 @@ src_install() {
 	insinto /usr/include/postgresql-${SLOT}/postmaster
 	doins "${S}"/src/include/postmaster/*.h
 
-	dodir /usr/share/postgresql-${SLOT}/man/
-	cp -r "${S}"/doc/src/sgml/man{1,7} "${ED}"/usr/share/postgresql-${SLOT}/man/ || die
-	rm "${ED}/usr/share/postgresql-${SLOT}/man/man1"/{initdb,pg_controldata,pg_ctl,pg_resetxlog,postgres,postmaster}.1
+	rm -r "${ED}/usr/share/doc/postgresql-${SLOT}/html"
+	rm "${ED}"/usr/share/postgresql-${SLOT}/man/man1/{initdb,pg_{controldata,ctl,resetxlog},post{gres,master}}.1
 	docompress /usr/share/postgresql-${SLOT}/man/man{1,7}
 
 	dodoc README HISTORY doc/{README.*,TODO,bug.template}
