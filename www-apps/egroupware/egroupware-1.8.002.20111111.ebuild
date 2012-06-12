@@ -1,10 +1,6 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
-
-##
-# based on ebuild from bug #284536, depending on dev-php/PEAR-XML_Feed_Parser from #258604
-##
 
 EAPI="2"
 
@@ -38,10 +34,9 @@ RDEPEND="
 	dev-php/PEAR-XML_Feed_Parser
 	virtual/cron
 	net-mail/tnef
-   jpgraph? ( dev-php/jpgraph )
+	jpgraph? ( dev-php/jpgraph )
 "
 #	>dev-php5/jpgraph-1.13
-
 
 need_httpd_cgi
 need_php_httpd
@@ -51,15 +46,15 @@ S=${WORKDIR}/${PN}
 src_prepare() {
 	esvn_clean
 
-   if use jpgraph; then
-#   	einfo "Fixing jpgraph issues."
-   	MY_JPGRAPH_VERSION="$(best_version dev-php/jpgraph)"
-   	MY_JPGRAPH_VERSION="${MY_JPGRAPH_VERSION/'dev-php/jpgraph-'/}"
-   	sed -i "s|$jpgraph_path .= SEP.'jpgraph';|$jpgraph_path = dirname('/usr/share/php/jpgraph/jpgraph.php');|" \
-   		setup/check_install.php || die
-   	sed -i "s|'unknown';|'${MY_JPGRAPH_VERSION}';\n         \$available = version_compare(\$version,\$min_version,'>=');|" \
-   		setup/check_install.php || die
-   fi
+	if use jpgraph; then
+#		einfo "Fixing jpgraph issues."
+		MY_JPGRAPH_VERSION="$(best_version dev-php/jpgraph)"
+		MY_JPGRAPH_VERSION="${MY_JPGRAPH_VERSION/'dev-php/jpgraph-'/}"
+		sed -i "s|$jpgraph_path .= SEP.'jpgraph';|$jpgraph_path = dirname('/usr/share/php/jpgraph/jpgraph.php');|" \
+			setup/check_install.php || die
+		sed -i "s|'unknown';|'${MY_JPGRAPH_VERSION}';\n         \$available = version_compare(\$version,\$min_version,'>=');|" \
+			setup/check_install.php || die
+	fi
 }
 
 src_install() {

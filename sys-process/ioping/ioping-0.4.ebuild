@@ -23,6 +23,6 @@ src_compile() {
 }
 
 src_install() {
-    dobin ${PN}
-    doman ${PN}.1
+	dobin ${PN}
+	doman ${PN}.1
 }

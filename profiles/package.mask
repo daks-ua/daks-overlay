@@ -24,3 +24,9 @@
 # Dmitry 'daks' Fomenko (04 Apr 2012)
 # Because an experimental stage of patch for autopatching
 =sys-apps/portage-2.2*
+
+# Dmitry 'daks' Fomenko (11 Jun 2012)
+# Old ebuilds. Scheduled to remove in 30 days
+=app-admin/conkyforecast-2.15
+=media-fonts/paratype-1.0
+=net-misc/pssh-2.2.2

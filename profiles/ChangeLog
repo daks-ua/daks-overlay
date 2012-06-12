@@ -9,3 +9,10 @@
   04 May 2012; Dmitry 'daks' Fomenko <daks12@gmail.com> package.mask:
   sys-apps/portage-2.2*: Masked because of early experimental stage of patch for
   autopatching.
+
+  11 Jun 2012; Dmitry 'daks' Fomenko <daks12@gmail.com> package.mask:
+  app-admin/conkyforecast-2.15, media-fonts/paratype-1.0, net-misc/pssh-2.2.2:
+  Old ebuilds. Scheduled for removal in 30 days.
+
+  12 Jun 2012; Dmitry 'daks' Fomenko <daks12@gmail.com> package.mask:
+  Added scripts for regen stuff from mva overlay.

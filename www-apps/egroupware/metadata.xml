@@ -5,4 +5,9 @@
 		<email>daks12@gmail.com</email>
 		<name>Dmitry 'daks' Fomenko</name>
 	</maintainer>
+	<use>
+		<flag name='gallery'>Add Gallery2 integration to the eGroupware</flag>
+		<flag name='phpfreechat'>Add phpFreeChat (http://www.phpfreechat.net) integration to the eGroupware</flag>
+		<flag name='jpgraph'>Add jpgraph (dev-php/jpgraph) integration to the eGroupware</flag>
+	</use>
 </pkgmetadata>
