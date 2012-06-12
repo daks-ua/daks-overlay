@@ -15,7 +15,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86
 DESCRIPTION="PostgreSQL libraries and clients"
 HOMEPAGE="http://www.postgresql.org/"
 SRC_URI="mirror://postgresql/source/v${PV}/postgresql-${PV}.tar.bz2
-		 http://dev.gentoo.org/~titanofold/postgresql-patches-8.3-r2.tbz2"
+		 http://dev.gentoo.org/~titanofold/postgresql-patches-8.4-r2.tbz2"
 LICENSE="POSTGRESQL"
 
 S="${WORKDIR}/postgresql-${PV}"
@@ -24,7 +24,7 @@ S="${WORKDIR}/postgresql-${PV}"
 RESTRICT="test"
 
 LINGUAS="af cs de en es fa fr hr hu it ko nb pl pt_BR ro ru sk sl sv tr zh_CN zh_TW"
-IUSE="doc kerberos ldap nls pam pg-intdatetime readline ssl threads zlib"
+IUSE="1c doc kerberos ldap nls pam pg_legacytimestamp readline ssl threads zlib"
 
 for lingua in ${LINGUAS} ; do
 	IUSE+=" linguas_${lingua}"
@@ -40,18 +40,19 @@ wanted_languages() {
 	echo -n ${enable_langs}
 }
 
-RDEPEND=">=app-admin/eselect-postgresql-1.0.10
-		 virtual/libintl
-		 !!dev-db/libpq
-		 !!dev-db/postgresql
-		 !!dev-db/postgresql-client
-		 !!dev-db/postgresql-libs
-		 kerberos? ( virtual/krb5 )
-		 ldap? ( net-nds/openldap )
-		 pam? ( virtual/pam )
-		 readline? ( >=sys-libs/readline-4.1 )
-		 ssl? ( >=dev-libs/openssl-0.9.6-r1 )
-		 zlib? ( >=sys-libs/zlib-1.1.3 )"
+RDEPEND=">=app-admin/eselect-postgresql-1.0.7
+		virtual/libintl
+		!!dev-db/libpq
+		!!dev-db/postgresql
+		!!dev-db/postgresql-client
+		!!dev-db/postgresql-libs
+		kerberos? ( virtual/krb5 )
+		ldap? ( net-nds/openldap )
+		pam? ( virtual/pam )
+		readline? ( >=sys-libs/readline-4.1 )
+		ssl? ( >=dev-libs/openssl-0.9.6-r1 )
+		zlib? ( >=sys-libs/zlib-1.1.3 )
+		1c? ( dev-libs/icu )"
 
 DEPEND="${RDEPEND}
 		!!<sys-apps/sandbox-2.0
@@ -67,7 +68,7 @@ PDEPEND="doc? ( ~dev-db/postgresql-docs-${PV} )"
 src_prepare() {
 	epatch "${WORKDIR}/autoconf.patch" "${WORKDIR}/base.patch" \
 		"${WORKDIR}/bool.patch" "${WORKDIR}/darwin.patch" \
-		"${WORKDIR}/relax_ssl_perms.patch" "${WORKDIR}/SuperH.patch" \
+		"${WORKDIR}/SuperH.patch"
 
 	eprefixify src/include/pg_config_manual.h
 
@@ -89,19 +90,19 @@ src_configure() {
 	local PO="${EPREFIX%/}"
 	econf --prefix="${PO}/usr/$(get_libdir)/postgresql-${SLOT}" \
 		--datadir="${PO}/usr/share/postgresql-${SLOT}" \
+		--docdir="${PO}/usr/share/doc/postgresql-${SLOT}" \
 		--includedir="${PO}/usr/include/postgresql-${SLOT}" \
 		--mandir="${PO}/usr/share/postgresql-${SLOT}/man" \
 		--sysconfdir="${PO}/etc/postgresql-${SLOT}" \
-		--without-docdir \
+		--without-tcl \
 		--without-perl \
 		--without-python \
-		--without-tcl \
 		$(use_with kerberos krb5) \
 		$(use_with kerberos gssapi) \
 		$(use_with ldap) \
 		"$(use_enable nls nls "$(wanted_languages)")" \
 		$(use_with pam) \
-		$(use_enable pg-intdatetime integer-datetimes ) \
+		$(use_enable !pg_legacytimestamp integer-datetimes ) \
 		$(use_with readline) \
 		$(use_with ssl openssl) \
 		$(use_enable threads thread-safety) \
@@ -119,9 +120,9 @@ src_install() {
 	emake DESTDIR="${D}" install
 	insinto /usr/include/postgresql-${SLOT}/postmaster
 	doins "${S}"/src/include/postmaster/*.h
-	dodir /usr/share/postgresql-${SLOT}/man/man1
 
-	rm "${ED}"/usr/share/postgresql-${SLOT}/man/man1/{initdb,ipcclean,pg_{controldata,ctl,resetxlog},post{gres,master}}.1
+	rm -r "${ED}/usr/share/doc/postgresql-${SLOT}/html"
+	rm "${ED}"/usr/share/postgresql-${SLOT}/man/man1/{initdb,pg_{controldata,ctl,resetxlog},post{gres,master}}.1
 	docompress /usr/share/postgresql-${SLOT}/man/man{1,7}
 
 	dodoc README HISTORY doc/{README.*,TODO,bug.template}
