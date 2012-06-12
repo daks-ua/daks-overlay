@@ -30,3 +30,4 @@
 =app-admin/conkyforecast-2.15
 =media-fonts/paratype-1.0
 =net-misc/pssh-2.2.2
+=sys-process/ioping-0.4

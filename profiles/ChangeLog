@@ -11,7 +11,8 @@
   autopatching.
 
   11 Jun 2012; Dmitry 'daks' Fomenko <daks12@gmail.com> package.mask:
-  app-admin/conkyforecast-2.15, media-fonts/paratype-1.0, net-misc/pssh-2.2.2:
+  app-admin/conkyforecast-2.15, media-fonts/paratype-1.0, net-misc/pssh-2.2.2,
+  sys-process/ioping-0.4:
   Old ebuilds. Scheduled for removal in 30 days.
 
   12 Jun 2012; Dmitry 'daks' Fomenko <daks12@gmail.com> package.mask:
