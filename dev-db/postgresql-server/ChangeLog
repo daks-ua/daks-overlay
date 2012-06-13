@@ -1,0 +1,24 @@
+# ChangeLog for dev-db/postgresql-server
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v3
+# $Header: $
+
+*postgresql-server-8.3.18 (14 May 2012)
+*postgresql-server-8.4.11 (14 May 2012)
+
+  14 May 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +postgresql-server-8.3.18.ebuild, +postgresql-server-8.4.11.ebuild,
+  -postgresql-server-8.3.12-r1.ebuild, -postgresql-server-8.4.5-r1.ebuild,
+  -postgresql-server-8.4.6-r1.ebuild, -postgresql-server-9.0.3-r3.ebuild,
+  -postgresql-server-9.0.3.ebuild, -postgresql-server-9.0.5.ebuild,
+  -postgresql-8.3.1-server.patch, -postgresql-8.3-common.patch,
+  -postgresql-8.3-server.patch, -postgresql-8.4-common.patch,
+  -postgresql-8.4-server.patch, -postgresql-9.0-common.3.patch,
+  -postgresql-9.0-server.3.patch:
+  Bump version. Cleanup a bit.
+
+*postgresql-server-9.0.7 (29 Feb 2012)
+
+  29 Feb 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +postgresql-server-9.0.7.ebuild, +ChangeLog, +metadata.xml:
+  Bump version. Add kernel.shmmax check. Add ChangeLog
+  and metadata.xml.

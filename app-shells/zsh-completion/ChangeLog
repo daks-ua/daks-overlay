@@ -1,0 +1,7 @@
+# ChangeLog for app-shells/zsh-completion
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  10 May 2012; Dmitry 'daks' Fomenko <daks12@gmail.com> +metadata.xml,
+  +ChangeLog, +zsh-completion-99999999.ebuild:
+  Added from "mva" (Vadim A. Misbakh-Soloviov <mva@mva.name>) overlay.

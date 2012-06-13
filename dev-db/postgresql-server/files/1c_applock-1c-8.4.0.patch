@@ -1,0 +1,180 @@
+diff -c -r -N ..\postgresql-8.4.0/doc/src/sgml/ref/lock.sgml ./doc/src/sgml/ref/lock.sgml
+*** ..\postgresql-8.4.0/doc/src/sgml/ref/lock.sgml	Mon Jan 12 11:54:25 2009
+--- ./doc/src/sgml/ref/lock.sgml	Mon Jul 13 15:52:20 2009
+***************
+*** 27,32 ****
+--- 27,33 ----
+  
+      ACCESS SHARE | ROW SHARE | ROW EXCLUSIVE | SHARE UPDATE EXCLUSIVE
+      | SHARE | SHARE ROW EXCLUSIVE | EXCLUSIVE | ACCESS EXCLUSIVE
++     | APPLICATION SHARE | APPLICATION EXCLUSIVE
+  </synopsis>
+   </refsynopsisdiv>
+  
+diff -c -r -N ..\postgresql-8.4.0/src/backend/parser/gram.y ./src/backend/parser/gram.y
+*** ..\postgresql-8.4.0/src/backend/parser/gram.y	Mon Jul 13 16:01:52 2009
+--- ./src/backend/parser/gram.y	Mon Jul 13 15:52:20 2009
+***************
+*** 426,432 ****
+  
+  /* ordinary key words in alphabetical order */
+  %token <keyword> ABORT_P ABSOLUTE_P ACCESS ACTION ADD_P ADMIN AFTER
+! 	AGGREGATE ALL ALSO ALTER ALWAYS ANALYSE ANALYZE AND ANY ARRAY AS ASC
+  	ASSERTION ASSIGNMENT ASYMMETRIC AT AUTHORIZATION
+  
+  	BACKWARD BEFORE BEGIN_P BETWEEN BIGINT BINARY BIT
+--- 426,432 ----
+  
+  /* ordinary key words in alphabetical order */
+  %token <keyword> ABORT_P ABSOLUTE_P ACCESS ACTION ADD_P ADMIN AFTER
+! 	AGGREGATE ALL ALSO ALTER ALWAYS ANALYSE ANALYZE AND ANY APPLICATION ARRAY AS ASC
+  	ASSERTION ASSIGNMENT ASYMMETRIC AT AUTHORIZATION
+  
+  	BACKWARD BEFORE BEGIN_P BETWEEN BIGINT BINARY BIT
+***************
+*** 6666,6671 ****
+--- 6666,6673 ----
+  lock_type:	ACCESS SHARE					{ $$ = AccessShareLock; }
+  			| ROW SHARE						{ $$ = RowShareLock; }
+  			| ROW EXCLUSIVE					{ $$ = RowExclusiveLock; }
++ 			| APPLICATION SHARE             { $$ = ApplicationShareLock; }
++ 			| APPLICATION EXCLUSIVE         { $$ = ApplicationExclusiveLock; }
+  			| SHARE UPDATE EXCLUSIVE		{ $$ = ShareUpdateExclusiveLock; }
+  			| SHARE							{ $$ = ShareLock; }
+  			| SHARE ROW EXCLUSIVE			{ $$ = ShareRowExclusiveLock; }
+***************
+*** 10129,10134 ****
+--- 10131,10137 ----
+  			| ALSO
+  			| ALTER
+  			| ALWAYS
++ 			| APPLICATION
+  			| ASSERTION
+  			| ASSIGNMENT
+  			| AT
+diff -c -r -N ..\postgresql-8.4.0/src/backend/storage/lmgr/lock.c ./src/backend/storage/lmgr/lock.c
+*** ..\postgresql-8.4.0/src/backend/storage/lmgr/lock.c	Thu Jun 11 18:49:02 2009
+--- ./src/backend/storage/lmgr/lock.c	Mon Jul 13 15:52:20 2009
+***************
+*** 93,100 ****
+  	(1 << AccessShareLock) | (1 << RowShareLock) |
+  	(1 << RowExclusiveLock) | (1 << ShareUpdateExclusiveLock) |
+  	(1 << ShareLock) | (1 << ShareRowExclusiveLock) |
+! 	(1 << ExclusiveLock) | (1 << AccessExclusiveLock)
+  
+  };
+  
+  /* Names of lock modes, for debug printouts */
+--- 93,106 ----
+  	(1 << AccessShareLock) | (1 << RowShareLock) |
+  	(1 << RowExclusiveLock) | (1 << ShareUpdateExclusiveLock) |
+  	(1 << ShareLock) | (1 << ShareRowExclusiveLock) |
+! 	(1 << ExclusiveLock) | (1 << AccessExclusiveLock),
+  
++     /* ApplicationShareLock*/
++     (1 << ApplicationExclusiveLock),
++ 
++     
++     /* ApplicationExclusiveLock*/
++     (1 << ApplicationExclusiveLock | 1 << ApplicationShareLock)
+  };
+  
+  /* Names of lock modes, for debug printouts */
+***************
+*** 108,114 ****
+  	"ShareLock",
+  	"ShareRowExclusiveLock",
+  	"ExclusiveLock",
+! 	"AccessExclusiveLock"
+  };
+  
+  #ifndef LOCK_DEBUG
+--- 114,122 ----
+  	"ShareLock",
+  	"ShareRowExclusiveLock",
+  	"ExclusiveLock",
+! 	"AccessExclusiveLock",
+!     "ApplicationShareLock",
+!     "ApplicationExclusiveLock"
+  };
+  
+  #ifndef LOCK_DEBUG
+***************
+*** 116,122 ****
+  #endif
+  
+  static const LockMethodData default_lockmethod = {
+! 	AccessExclusiveLock,		/* highest valid lock mode number */
+  	true,
+  	LockConflicts,
+  	lock_mode_names,
+--- 124,130 ----
+  #endif
+  
+  static const LockMethodData default_lockmethod = {
+! 	ApplicationExclusiveLock,		/* highest valid lock mode number */
+  	true,
+  	LockConflicts,
+  	lock_mode_names,
+***************
+*** 128,134 ****
+  };
+  
+  static const LockMethodData user_lockmethod = {
+! 	AccessExclusiveLock,		/* highest valid lock mode number */
+  	false,
+  	LockConflicts,
+  	lock_mode_names,
+--- 136,142 ----
+  };
+  
+  static const LockMethodData user_lockmethod = {
+! 	ApplicationExclusiveLock,		/* highest valid lock mode number */
+  	false,
+  	LockConflicts,
+  	lock_mode_names,
+diff -c -r -N ..\postgresql-8.4.0/src/include/parser/kwlist.h ./src/include/parser/kwlist.h
+*** ..\postgresql-8.4.0/src/include/parser/kwlist.h	Mon Apr  6 12:42:53 2009
+--- ./src/include/parser/kwlist.h	Mon Jul 13 16:00:08 2009
+***************
+*** 42,47 ****
+--- 42,48 ----
+  PG_KEYWORD("analyze", ANALYZE, RESERVED_KEYWORD)
+  PG_KEYWORD("and", AND, RESERVED_KEYWORD)
+  PG_KEYWORD("any", ANY, RESERVED_KEYWORD)
++ PG_KEYWORD("application", APPLICATION, UNRESERVED_KEYWORD)
+  PG_KEYWORD("array", ARRAY, RESERVED_KEYWORD)
+  PG_KEYWORD("as", AS, RESERVED_KEYWORD)
+  PG_KEYWORD("asc", ASC, RESERVED_KEYWORD)
+diff -c -r -N ..\postgresql-8.4.0/src/include/storage/lock.h ./src/include/storage/lock.h
+*** ..\postgresql-8.4.0/src/include/storage/lock.h	Sat Apr  4 21:40:36 2009
+--- ./src/include/storage/lock.h	Mon Jul 13 15:52:20 2009
+***************
+*** 87,93 ****
+  typedef int LOCKMODE;
+  
+  /* MAX_LOCKMODES cannot be larger than the # of bits in LOCKMASK */
+! #define MAX_LOCKMODES		10
+  
+  #define LOCKBIT_ON(lockmode) (1 << (lockmode))
+  #define LOCKBIT_OFF(lockmode) (~(1 << (lockmode)))
+--- 87,93 ----
+  typedef int LOCKMODE;
+  
+  /* MAX_LOCKMODES cannot be larger than the # of bits in LOCKMASK */
+! #define MAX_LOCKMODES		12
+  
+  #define LOCKBIT_ON(lockmode) (1 << (lockmode))
+  #define LOCKBIT_OFF(lockmode) (~(1 << (lockmode)))
+***************
+*** 156,161 ****
+--- 156,164 ----
+  #define AccessExclusiveLock		8		/* ALTER TABLE, DROP TABLE, VACUUM
+  										 * FULL, and unqualified LOCK TABLE */
+  
++ #define ApplicationShareLock       9   /* requested explicitly */
++ #define ApplicationExclusiveLock   10  /* requested explicitly */
++ 
+  
+  /*
+   * LOCKTAG is the key information needed to look up a LOCK item in the

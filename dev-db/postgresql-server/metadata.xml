@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer>
+		<email>daks12@gmail.com</email>
+		<name>Dmitry 'daks' Fomenko</name>
+	</maintainer>
+	<use>
+		<flag name='1c'>Apply patchset for work with 1C:Enterprise ERP system</flag>
+		<flag name='uuid'>Enable server side UUID generation
+			(via <pkg>dev-libs/ossp-uuid</pkg>)</flag>
+		<flag name='pg_legacytimestamp'>Use double precision floating-point numbers
+			instead of 64-bit integers for timestamp storage.
+		</flag>
+	</use>
+</pkgmetadata>

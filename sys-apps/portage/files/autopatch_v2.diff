@@ -1,0 +1,49 @@
+diff -Naur portage-2.2.0_alpha100.old/bin/phase-functions.sh portage-2.2.0_alpha100.new/bin/phase-functions.sh
+--- portage-2.2.0_alpha100.old/bin/phase-functions.sh	2012-03-22 23:36:36.000000000 +0200
++++ portage-2.2.0_alpha100.new/bin/phase-functions.sh	2012-04-28 13:08:53.027342834 +0300
+@@ -246,6 +246,22 @@
+ 	ebuild_phase pre_src_unpack
+ 	vecho ">>> Unpacking source..."
+ 	ebuild_phase src_unpack
++	if [ "${EAPI-0}" -lt 2 -a -n "${PORTAGE_PATCHDIR}" -a -d "${PORTAGE_PATCHDIR}/${CATEGORY}/${PN}" ]; then
++		[[ "$(type -t epatch)" == "function" ]] || qa_source ${PORTDIR}/eclass/eutils.eclass
++		vecho ">>> Applying custom patches..."
++		cd "$S"
++		PATCHDIR=${PORTAGE_PATCHDIR}/${CATEGORY}/${PN}/${PV//.//}
++		PATCHLIST=
++		[[ -d ${PATCHDIR} ]] && PATCHLIST=" ${PATCHDIR}/* ${PATCHLIST}"
++		while [[ ${PATCHDIR} != ${PORTAGE_PATCHDIR}/${CATEGORY}/${PN} ]]; do
++			PATCHDIR=${PATCHDIR%/*}
++			[[ -d ${PATCHDIR} ]] && PATCHLIST="${PATCHDIR}/* ${PATCHLIST}"
++		done
++		for patch in ${PATCHLIST}; do 
++			[[ -f "${patch}" ]] || continue
++			epatch "${patch}" || die "Failed to apply patch ${patch}"
++		done
++	fi
+ 	>> "$PORTAGE_BUILDDIR/.unpacked" || \
+ 		die "Failed to create $PORTAGE_BUILDDIR/.unpacked"
+ 	vecho ">>> Source unpacked in ${WORKDIR}"
+@@ -377,6 +393,22 @@
+ 	ebuild_phase pre_src_prepare
+ 	vecho ">>> Preparing source in $PWD ..."
+ 	ebuild_phase src_prepare
++	if [ "${EAPI-0}" -ge 2 -a -n "${PORTAGE_PATCHDIR}" -a -d "${PORTAGE_PATCHDIR}/${CATEGORY}/${PN}" ]; then
++		[[ "$(type -t epatch)" == "function" ]] || qa_source ${PORTDIR}/eclass/eutils.eclass 
++		vecho ">>> Applying custom patches..."
++		cd "$S"
++		PATCHDIR=${PORTAGE_PATCHDIR}/${CATEGORY}/${PN}/${PV//.//}
++		PATCHLIST=
++		[[ -d ${PATCHDIR} ]] && PATCHLIST=" ${PATCHDIR}/* ${PATCHLIST}"
++		while [[ ${PATCHDIR} != ${PORTAGE_PATCHDIR}/${CATEGORY}/${PN} ]]; do
++			PATCHDIR=${PATCHDIR%/*}
++			[[ -d ${PATCHDIR} ]] && PATCHLIST="${PATCHDIR}/* ${PATCHLIST}"
++		done
++		for patch in ${PATCHLIST}; do 
++			[[ -f "${patch}" ]] || continue
++			epatch "${patch}" || die "Failed to apply patch ${patch}"
++		done
++	fi
+ 	>> "$PORTAGE_BUILDDIR/.prepared" || \
+ 		die "Failed to create $PORTAGE_BUILDDIR/.prepared"
+ 	vecho ">>> Source prepared."

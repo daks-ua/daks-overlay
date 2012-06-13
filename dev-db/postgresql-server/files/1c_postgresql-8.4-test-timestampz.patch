@@ -1,0 +1,20 @@
+--- postgresql-8.4.2/src/test/regress/expected/timestamptz.out.orig	2010-01-14 19:15:23.000000000 +0300
++++ postgresql-8.4.2/src/test/regress/expected/timestamptz.out	2010-01-14 19:15:27.000000000 +0300
+@@ -153,7 +153,7 @@
+ SELECT '20500710 173201 Europe/Helsinki'::timestamptz; -- DST
+          timestamptz          
+ ------------------------------
+- Sun Jul 10 07:32:01 2050 PDT
++ Sun Jul 10 07:32:01 2050 PST
+ (1 row)
+ 
+ SELECT '20500110 173201 Europe/Helsinki'::timestamptz; -- non-DST
+@@ -165,7 +165,7 @@
+ SELECT '205000-07-10 17:32:01 Europe/Helsinki'::timestamptz; -- DST
+           timestamptz           
+ --------------------------------
+- Thu Jul 10 07:32:01 205000 PDT
++ Thu Jul 10 07:32:01 205000 PST
+ (1 row)
+ 
+ SELECT '205000-01-10 17:32:01 Europe/Helsinki'::timestamptz; -- non-DST

@@ -1,0 +1,3 @@
+move app-i18n/libnatspec dev-libs/libnatspec
+move media-font/font-paratype media-font/paratype
+move sys-process/ioping app-benchmarks/ioping

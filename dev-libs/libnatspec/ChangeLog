@@ -1,0 +1,16 @@
+# ChangeLog for dev-libs/libnatspec
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  11 Jun 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  -libnatspec-0.2.4.ebuild, metadata.xml:
+  Purge old ebuild, change metadata. Move from app-i18n to
+  dev-libs.
+
+* libnatspec-0.2.6
+
+  15 Feb 2011; Kazankov Alexander <johnrdoe63@cregion.ru>;
+  Version bump.
+
+  19 Mar 2009; Kazankov Alexander <johnrdoe63@cregion.ru>;
+  Initial

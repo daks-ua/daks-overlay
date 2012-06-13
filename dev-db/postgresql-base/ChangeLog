@@ -1,0 +1,35 @@
+# ChangeLog for postgresql-base
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v3
+# $Header: $
+
+*postgresql-base-8.4.11-r1 (14 May 2012)
+
+  12 Jun 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +postgresql-base-8.4.11-r1.ebuild:
+  Add 1c to IUSE.
+
+*postgresql-base-8.3.18 (14 May 2012)
+*postgresql-base-8.4.11 (14 May 2012)
+
+  14 May 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +postgresql-base-8.3.18.ebuild, +postgresql-base-8.4.11.ebuild,
+  -files/postgresql-9.0-base.3.patch,-files/postgresql-9.0-common.3.patch,
+  -postgresql-base-9.0.3-r1.ebuild, -postgresql-base-9.0.3-r2.ebuild,
+  -postgresql-base-9.0.5.ebuild, -postgresql-base-9.0.5-r1.ebuild
+
+
+*postgresql-base-9.0.3-r2 (10 Apr 2012)
+*postgresql-base-9.0.5-r1 (10 Apr 2012)
+*postgresql-base-9.0.7-r1 (10 Apr 2012)
+
+  10 Apr 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +postgresql-base-9.0.3-r2.ebuild, +postgresql-base-9.0.5-r1.ebuild,
+  +postgresql-base-9.0.7-r1.ebuild, -postgresql-base-9.0.3.ebuild:
+  Added dev-libs/icu to depends when the 1c USE flag is enabled.
+  Thanks to Andrew Hazzan for reporting. Minor clean ups.
+
+*postgresql-base-9.0.7 (29 Feb 2012)
+
+  29 Feb 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +postgresql-base-9.0.7.ebuild, +ChangeLog, +metadata.xml:
+  Bump version. Add ChangeLog and metadata.xml.

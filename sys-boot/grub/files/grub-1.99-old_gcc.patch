@@ -1,0 +1,16 @@
+--- grub-core/video/fb/video_fb.c.orig	2011-04-05 22:17:43.000000000 +0300
++++ grub-core/video/fb/video_fb.c	2011-04-05 22:14:04.000000000 +0300
+@@ -1447,11 +1447,11 @@
+     {
+       mode_info->mode_type |= (GRUB_VIDEO_MODE_TYPE_DOUBLE_BUFFERED
+ 			       | GRUB_VIDEO_MODE_TYPE_UPDATING_SWAP);
+-
++      void *pg0ptr = (void *)page0_ptr;
+       err = grub_video_fb_doublebuf_blit_init (&framebuffer.front_target,
+ 					       &framebuffer.back_target,
+ 					       *mode_info,
+-					       (void *) page0_ptr);
++					       pg0ptr);
+ 
+       if (!err)
+ 	{

@@ -1,0 +1,55 @@
+diff -Naur ./nagios-3.2.1/cgi/notifications.c ./nagios-3.2.1-new/cgi/notifications.c
+--- ./nagios-3.2.1/cgi/notifications.c	2009-05-13 12:26:30.000000000 +0300
++++ ./nagios-3.2.1-new/cgi/notifications.c	2011-04-18 14:32:53.956603688 +0300
+@@ -311,6 +311,7 @@
+ 	printf("<html>\n");
+ 	printf("<head>\n");
+ 	printf("<link rel=\"shortcut icon\" href=\"%sfavicon.ico\" type=\"image/ico\">\n",url_images_path);
++	printf("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
+ 	printf("<title>\n");
+ 	printf("Alert Notifications\n");
+ 	printf("</title>\n");
+@@ -742,6 +743,7 @@
+ 				printf("<td CLASS='notifications%s'><a href='%s?type=contacts#%s'>%s</a></td>\n",(odd)?"Even":"Odd",CONFIG_CGI,url_encode(contact_name),contact_name);
+ 				printf("<td CLASS='notifications%s'><a href='%s?type=commands#%s'>%s</a></td>\n",(odd)?"Even":"Odd",CONFIG_CGI,url_encode(method_name),method_name);
+ 				printf("<td CLASS='notifications%s'>%s</td>\n",(odd)?"Even":"Odd",html_encode(temp_buffer,FALSE));
++				echo "ТЕСТ";
+ 				printf("</tr>\n");
+ 			        }
+ 		        }
+diff -Naur ./nagios-3.2.1/html/index.php ./nagios-3.2.1-new/html/index.php
+--- ./nagios-3.2.1/html/index.php	2009-01-23 18:12:17.000000000 +0200
++++ ./nagios-3.2.1-new/html/index.php	2011-04-18 14:24:32.546588002 +0300
+@@ -2,7 +2,7 @@
+ 
+ <html>
+ <head>
+-<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
++<meta name="ROBOTS" content="NOINDEX, NOFOLLOW; charset=UTF-8">
+ <title>Nagios</title>
+ <link rel="shortcut icon" href="images/favicon.ico" type="image/ico">
+ </head>
+diff -Naur ./nagios-3.2.1/html/main.php ./nagios-3.2.1-new/html/main.php
+--- ./nagios-3.2.1/html/main.php	2010-03-09 20:39:59.000000000 +0200
++++ ./nagios-3.2.1-new/html/main.php	2011-04-18 14:18:34.806602002 +0300
+@@ -9,7 +9,7 @@
+ <HTML>
+ 
+ <HEAD>
+-<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
++<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW; charset=UTF-8">
+ <TITLE>Nagios</TITLE>
+ <LINK REL='stylesheet' TYPE='text/css' HREF='stylesheets/common.css'>
+ </HEAD>
+diff -Naur ./nagios-3.2.1/html/side.php ./nagios-3.2.1-new/html/side.php
+--- ./nagios-3.2.1/html/side.php	2009-03-10 22:05:43.000000000 +0200
++++ ./nagios-3.2.1-new/html/side.php	2011-04-18 14:24:50.556549023 +0300
+@@ -9,7 +9,7 @@
+ <html>
+ 
+ <head>
+-<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
++<meta name="ROBOTS" content="NOINDEX, NOFOLLOW; charset=UTF-8">
+ <TITLE>Nagios</TITLE>
+ <link href="stylesheets/common.css" type="text/css" rel="stylesheet">
+ </head>
