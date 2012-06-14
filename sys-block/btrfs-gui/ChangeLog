@@ -1,0 +1,11 @@
+# ChangeLog for sys-block/btrfs-gui
+# Copyright 2012 Gentoo Foundation; Distributed under the GPL v3
+# $Header: $
+
+*btrfs-gui-0.2.1 (14 Jun 2012)
+*btrfs-gui-9999 (14 Jun 2012)
+
+  14 Jun 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +btrf-gui-0.2.1.ebuild, +btrf-gui-9999.ebuild,+metadata.xml,
+  +ChangeLog:
+  Initial ebuild.
