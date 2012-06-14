@@ -19,7 +19,7 @@ SRC_URI="mirror://sourceforge/${PN}/${MY_PN}-${MY_PV}.${MY_P}.tar.bz2
 	gallery? ( mirror://sourceforge/${PN}/${MY_PN}-gallery-${MY_PV}.${MY_P}.tar.bz2 )"
 
 LICENSE="GPL-2"
-KEYWORDS="~alpha ~amd64 ~hppa ~ppc ~sparc ~x86"
+KEYWORDS="~amd64 ~hppa ~ppc ~x86"
 IUSE="ldap mssql mysql postgres gallery phpfreechat jpgraph"
 
 #hint: sqlite needed for calendar

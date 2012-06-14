@@ -1,4 +1,4 @@
-# Copyright 1999-2006 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -16,6 +16,8 @@ KEYWORDS="amd64 x86"
 IUSE="-cngplp"    # enable or disable cngplp compilation, may cause build break on ~amd64, don't really know if cngplp is ever needed
 
 DEPEND=">=net-print/cups-1.1.17"
+RDEPEND="${DEPEND}"
+
 S=${WORKDIR}/${PN}-$(get_version_component_range 1-2)
 
 dir=/usr/$(get_libdir)
@@ -29,7 +31,7 @@ QA_TEXTRELS="${dir:1}/libcaepcm.so.1.0
 src_unpack() {
 	unpack ${A}
 	unpack ./CAPT_Printer_Driver_for_Linux_V200_uk_EN/Src/${MY_PF}.tar.gz
-	cd ${S}
+	cd "${S}"
 }
 
 src_configure(){
@@ -57,7 +59,7 @@ src_compile() {
 src_install() {
 	for i in buftool cpca ${CNGPLP}; do
 		cd ${i}
-		make install DESTDIR=${D} || die "make install failed for ${i}" 
+		make install DESTDIR="${D}" || die "make install failed for ${i}"
 		cd ..
 	done
 
@@ -79,7 +81,7 @@ src_install() {
 	dosym  libcanonc3pl.so.1.0.0 /usr/$(get_libdir)/libcanonc3pl.so.1.0
 	dosym  libcanonc3pl.so.1.0.0 /usr/$(get_libdir)/libcanonc3pl.so.1
 	dosym  libcanonc3pl.so.1.0.0 /usr/$(get_libdir)/libcanonc3pl.so
-	
+
 	dobin libs/cnpkmodule
 	dobin libs/c3pldrv
 
@@ -87,7 +89,6 @@ src_install() {
 
 	insinto /usr/share/caepcm
 	doins data/*
-
 
 	dodoc LICENSE-common-*.txt README
 	for i in buftool cpca c3plmod_ipc ${CNGPLP}; do

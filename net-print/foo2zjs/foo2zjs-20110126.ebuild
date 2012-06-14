@@ -1,6 +1,6 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-print/foo2zjs/foo2zjs-20081129.ebuild,v 1.2 2008/12/31 03:40:50 mr_bones_ Exp $
+# $Header: $
 
 EAPI="3"
 inherit eutils
@@ -93,26 +93,25 @@ S=${WORKDIR}/${PN}
 
 src_unpack() {
 	unpack ${PN}.tar.gz
-
 	# link getweb files in ${S} to get unpacked
 	for i in ${A}
 	do
 		ln -s "${DISTDIR}"/${i} "${S}"
 	done
-
 	cd "${S}"
+}
+
+src_prepare() {
 	epatch "${FILESDIR}"/${P}-Makefile.patch || die "Makefile patch failed"
 	epatch "${FILESDIR}"/${P}-udevfwld.patch || die "Udev patch failed"
 }
 
 src_compile() {
 	emake getweb || die "Failed building getweb script"
-
 	# remove wget as we got the firmware with portage
 	sed -i -e "s/.*wget .*//" \
 		-e 's/.*rm $.*//' \
 		-e "s/error \"Couldn't dow.*//" getweb
-
 	# unpack files
 	GOT=0;
 	for ((DEV=0; DEV < ${#DEVICES[*]}; DEV++)); do
@@ -122,15 +121,12 @@ src_compile() {
 		fi
 	done
 	if [ ${GOT} == 0 ]; then ./getweb all; fi
-
 	emake || die "emake failed"
 }
 
 src_install() {
 	use foomaticdb && dodir /usr/share/foomatic/db/source
-
 	use cups && dodir /usr/share/cups/model
-
 	emake DESTDIR="${D}" install install-udev \
 		|| die "emake install failed"
 }

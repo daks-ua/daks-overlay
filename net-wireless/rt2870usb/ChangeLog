@@ -1,0 +1,9 @@
+# ChangeLog for net-wireless/rt2870usb
+# Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+* rt2870usb-2.4.0.1-r2 (20 Mar 2010)
+
+  20 Mar 2010; Dmitry 'daks' Fomenko <daks12@gmail.com> cndrvcups-capt-2.00-r2.ebuild,
+  rt2870usb-2.4.0.1-r2.ebuild, +metadata.xml, +ChangeLog:
+  Inital ebuild.
