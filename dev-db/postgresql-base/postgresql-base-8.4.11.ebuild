@@ -24,7 +24,7 @@ S="${WORKDIR}/postgresql-${PV}"
 RESTRICT="test"
 
 LINGUAS="af cs de en es fa fr hr hu it ko nb pl pt_BR ro ru sk sl sv tr zh_CN zh_TW"
-IUSE="doc kerberos ldap nls pam pg_legacytimestamp readline ssl threads zlib"
+IUSE="+1c doc kerberos ldap nls pam pg_legacytimestamp readline ssl threads zlib"
 
 for lingua in ${LINGUAS} ; do
 	IUSE+=" linguas_${lingua}"

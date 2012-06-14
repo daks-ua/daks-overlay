@@ -1,6 +1,6 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# : $
+# $Header: $
 
 MY_R=eter2.1gentoo
 MY_ARCH=i586
@@ -20,6 +20,7 @@ SRC_URI="$BASE_URI/extra/postgresql-8.3eter-test-8.3.8-eter2.1gentoo.i586.tar.bz
 LICENSE=BSD
 SLOT="0"
 KEYWORDS="-* x86 amd64"
+IUSE=""
 
 #src_unpack() {
 #unpack ${A}

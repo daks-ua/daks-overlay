@@ -1,4 +1,4 @@
-# Copyright 1999-2007 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -39,10 +39,10 @@ pkg_nofetch() {
 }
 
 src_compile() {
-	epatch ${FILESDIR}/${P}-usb_alloc_free.patch
-	epatch ${FILESDIR}/${P}-unified.patch
-	kernel_is ge 2 6 37 && epatch ${FILESDIR}/${P}-netif_stop_queue.patch
-	use debug || epatch ${FILESDIR}/${P}-nodebug.patch
+	epatch "${FILESDIR}"/"${P}"-usb_alloc_free.patch
+	epatch "${FILESDIR}"/"${P}"-unified.patch
+	kernel_is ge 2 6 37 && epatch "${FILESDIR}"/"${P}"-netif_stop_queue.patch
+	use debug || epatch "${FILESDIR}"/"${P}"-nodebug.patch
 
 	linux-mod_src_compile
 }
@@ -71,4 +71,3 @@ pkg_postinst() {
 	einfo "and allow the 'rt2800usb' one."
 	einfo
 }
-
