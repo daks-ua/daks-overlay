@@ -5,11 +5,11 @@
 		<email>daks12@gmail.com</email>
 		<name>Dmitry 'daks' Fomenko</name>
 	</maintainer>
-	<longdescription lang="ru">
-		Драйверы поддержки LPT и USB ключей HASP.
-	</longdescription>
 	<longdescription>
 		Drivers for LPT and USB HASP keys.
+	</longdescription>
+	<longdescription lang="ru">
+		Драйверы поддержки LPT и USB ключей HASP.
 	</longdescription>
 	<use>
 		<flag name='demo'>Install haspdemo and nethaspdemo utilities</flag>

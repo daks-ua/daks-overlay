@@ -1,10 +1,10 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/italc/italc-1.0.9.ebuild,v 1.9 2011/02/28 18:02:57 ssuominen Exp $
+# $Header: $
 
 EAPI=4
 
-inherit eutils cmake-utils
+inherit cmake-utils eutils user
 
 DESCRIPTION="Intelligent Teaching And Learning with Computers (iTALC) supports working with computers in school"
 HOMEPAGE="http://italc.sourceforge.net/"

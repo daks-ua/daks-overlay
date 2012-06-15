@@ -68,7 +68,7 @@ pkg_pretend() {
 }
 
 src_unpack() {
-	rpm_src_unpack "${A}"
+	rpm_src_unpack ${A}
 	tar -xf "${PN}"-"$(get_version_component_range 1-2)".tar
 }
 

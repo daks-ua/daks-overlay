@@ -6,11 +6,11 @@ EAPI="4"
 PYTHON_DEPEND="python? 2"
 
 WANT_AUTOMAKE="none"
-inherit autotools eutils multilib pam prefix python versionator
+inherit autotools eutils multilib pam prefix python user versionator
 
 SLOT="$(get_version_component_range 1-2)"
 
-KEYWORDS="alpha amd64 arm hppa ~ia64 ~mips ppc ~ppc64 ~s390 ~sh ~sparc x86 ~x86-fbsd ~ppc-macos ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd ~ppc-macos ~x86-solaris"
 
 DESCRIPTION="PostgreSQL server"
 HOMEPAGE="http://www.postgresql.org/"

@@ -1,18 +1,20 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-boot/grub/grub-1.99_rc1.ebuild,v 1.4 2011/06/28 16:33:29 vapier Exp $
+# $Header: $
+
+EAPI="4"
 
 # XXX: need to implement a grub.conf migration in pkg_postinst before we ~arch
 
-inherit mount-boot eutils flag-o-matic toolchain-funcs
+inherit eutils flag-o-matic mount-boot multilib toolchain-funcs
 
 if [[ ${PV} == "9999" ]] ; then
 	EBZR_REPO_URI="http://bzr.savannah.gnu.org/r/grub/trunk/grub/"
-	inherit autotools bzr
+	inherit bzr
 	SRC_URI=""
 else
 	MY_P=${P/_/\~}
-	SRC_URI="ftp://alpha.gnu.org/gnu/${PN}/${MY_P}.tar.gz
+	SRC_URI="mirro://gnu/${PN}/${MY_P}.tar.gz
 		mirror://gentoo/${MY_P}.tar.gz"
 	S=${WORKDIR}/${MY_P}
 fi
@@ -22,7 +24,7 @@ HOMEPAGE="http://www.gnu.org/software/grub/"
 
 LICENSE="GPL-3"
 use multislot && SLOT="2" || SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="custom-cflags debug truetype multislot static"
 
 RDEPEND=">=sys-libs/ncurses-5.2-r5
@@ -43,6 +45,9 @@ src_unpack() {
 		unpack ${A}
 	fi
 	cd "${S}"
+}
+
+src_prepare() {
 	epatch "${FILESDIR}"/${PN}-1.99-genkernel.patch #256335
 	epatch "${FILESDIR}"/${PN}-1.99-old_gcc.patch # bug #357445. http://savannah.gnu.org/bugs/?32676
 	epatch "${FILESDIR}"/${PN}-1.99-limits.patch # bug #357445, http://savannah.gnu.org/bugs/?32676
@@ -61,7 +66,7 @@ src_unpack() {
 		util/bash-completion.d/Makefile.in || die
 }
 
-src_compile() {
+src_configure() {
 	use custom-cflags || unset CFLAGS CPPFLAGS LDFLAGS
 	use static && append-ldflags -static
 
@@ -76,6 +81,9 @@ src_compile() {
 		$(use_enable debug grub-emu) \
 		$(use_enable debug grub-emu-usb) \
 		$(use_enable debug grub-fstest)
+}
+
+src_compile() {
 	emake -j1 || die "making regular stuff"
 }
 

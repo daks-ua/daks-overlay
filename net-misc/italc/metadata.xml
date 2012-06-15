@@ -5,4 +5,7 @@
 		<email>daks12@gmail.com</email>
 		<name>Dmitry 'daks' Fomenko</name>
 	</maintainer>
+	<use>
+		<flag name='system-libvncserver'>Enable system libvncserver instead integrated one</flag>
+	</use>
 </pkgmetadata>
