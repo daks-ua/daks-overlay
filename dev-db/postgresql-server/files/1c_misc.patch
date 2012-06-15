@@ -1,0 +1,70 @@
+diff -Naur postgresql-8.3.11.orig/contrib/Makefile postgresql-8.3.11/contrib/Makefile
+--- postgresql-8.3.11.orig/contrib/Makefile	2010-12-15 12:49:48.000000000 +0200
++++ postgresql-8.3.11/contrib/Makefile	2010-12-15 12:36:39.000000000 +0200
+@@ -32,7 +32,10 @@
+ 		spi		\
+ 		tablefunc	\
+ 		tsearch2	\
+-		test_parser
++		test_parser	\
++		mchar		\
++		fulleq		\
++		fasttrun
+ 
+ ifeq ($(with_openssl),yes)
+ WANTED_DIRS += sslinfo
+diff -Naur postgresql-8.3.11.orig/src/backend/libpq/pg_hba.conf.sample postgresql-8.3.11/src/backend/libpq/pg_hba.conf.sample
+--- postgresql-8.3.11.orig/src/backend/libpq/pg_hba.conf.sample	2007-07-23 13:16:53.000000000 +0300
++++ postgresql-8.3.11/src/backend/libpq/pg_hba.conf.sample	2010-12-15 12:42:20.000000000 +0200
+@@ -66,6 +66,7 @@
+ @remove-line-for-nolocal@# "local" is for Unix domain socket connections only
+ @remove-line-for-nolocal@local   all         all                               @authmethod@
+ # IPv4 local connections:
+-host    all         all         127.0.0.1/32          @authmethod@
++#host    all         all         127.0.0.1/32          @authmethod@
+ # IPv6 local connections:
+-host    all         all         ::1/128               @authmethod@
++#host    all         all         ::1/128               @authmethod@
++host    all         all         0.0.0.0/0             md5
+diff -Naur postgresql-8.3.11.orig/src/backend/utils/misc/postgresql.conf.sample postgresql-8.3.11/src/backend/utils/misc/postgresql.conf.sample
+--- postgresql-8.3.11.orig/src/backend/utils/misc/postgresql.conf.sample	2010-12-15 12:36:39.000000000 +0200
++++ postgresql-8.3.11/src/backend/utils/misc/postgresql.conf.sample	2010-12-15 12:46:10.000000000 +0200
+@@ -53,7 +53,7 @@
+ 
+ # - Connection Settings -
+ 
+-#listen_addresses = 'localhost'		# what IP address(es) to listen on;
++listen_addresses = '*'			# what IP address(es) to listen on;
+ 					# comma-separated list of addresses;
+ 					# defaults to 'localhost', '*' = all
+ 					# (change requires restart)
+@@ -206,7 +206,7 @@
+ #cpu_tuple_cost = 0.01			# same scale as above
+ #cpu_index_tuple_cost = 0.005		# same scale as above
+ #cpu_operator_cost = 0.0025		# same scale as above
+-#effective_cache_size = 128MB
++effective_cache_size = 512MB
+ 
+ # - Genetic Query Optimizer -
+ 
+@@ -459,7 +459,7 @@
+ #------------------------------------------------------------------------------
+ 
+ #deadlock_timeout = 1s
+-#max_locks_per_transaction = 64		# min 10
++max_locks_per_transaction = 150		# min 10
+ 					# (change requires restart)
+ # Note:  Each lock table slot uses ~270 bytes of shared memory, and there are
+ # max_locks_per_transaction * (max_connections + max_prepared_transactions)
+diff -Naur postgresql-8.3.11.orig/src/include/pg_config_manual.h postgresql-8.3.11/src/include/pg_config_manual.h
+--- postgresql-8.3.11.orig/src/include/pg_config_manual.h	2010-12-15 12:47:24.000000000 +0200
++++ postgresql-8.3.11/src/include/pg_config_manual.h	2010-12-15 12:36:39.000000000 +0200
+@@ -69,7 +69,7 @@
+  *
+  * Changing this requires an initdb.
+  */
+-#define NAMEDATALEN 64
++#define NAMEDATALEN 256
+ 
+ /*
+  * Maximum number of arguments to a function.

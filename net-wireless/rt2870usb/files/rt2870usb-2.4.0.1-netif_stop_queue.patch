@@ -1,0 +1,11 @@
+--- os/linux/rt_main_dev.c.orig	2011-02-06 11:32:18.000000000 +0300
++++ os/linux/rt_main_dev.c	2011-02-06 11:30:56.000000000 +0300
+@@ -635,8 +635,6 @@
+ 	SET_MODULE_OWNER(net_dev);
+ #endif 
+ 
+-	netif_stop_queue(net_dev);
+-
+ 	return net_dev;
+ 	
+ }
