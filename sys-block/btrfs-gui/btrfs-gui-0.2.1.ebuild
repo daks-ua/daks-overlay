@@ -37,7 +37,6 @@ if use helper-only; then
 	DISTUTILS_SETUP_FILES="setup-helper.py"
 fi
 
-
 src_prepare() {
 	distutils_src_prepare
 	sed -e \

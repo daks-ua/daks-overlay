@@ -1,4 +1,4 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -88,7 +88,7 @@ RDEPEND="cups? ( net-print/cups )
 	foomaticdb? ( net-print/foomatic-db-engine )
 	net-print/foomatic-filters
 	sys-fs/udev"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~x86 ~amd64 ~ppc"
 S=${WORKDIR}/${PN}
 
 src_unpack() {
