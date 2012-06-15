@@ -1,10 +1,10 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/italc/italc-1.0.9.ebuild,v 1.9 2011/02/28 18:02:57 ssuominen Exp $
+# $Header: $
 
 EAPI=2
 
-inherit autotools qt4 eutils autotools
+inherit autotools eutils user qt4
 
 DESCRIPTION="Intelligent Teaching And Learning with Computers (iTALC) supports working with computers in school"
 HOMEPAGE="http://italc.sourceforge.net/"
@@ -98,9 +98,7 @@ pkg_config() {
 pkg_postinst() {
 	elog "On the master, please run "
 	elog "# emerge --config =${CATEGORY}/${PF}"
-
 	elog "Please add the logins of master users (teachers) to the italc group by running"
 	elog "# usermod -a -G italc <loginname>"
-
 	elog ""
 }

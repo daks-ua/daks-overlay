@@ -23,7 +23,8 @@ SLOT="0"
 IUSE=""
 
 DEPEND=""
-RDEPEND="=x11-wm/awesome-${PV}"
+#RDEPEND="=x11-wm/awesome-${PV}"
+RDEPEND="x11-wm/awesome"
 
 src_unpack() {
 	git-2_src_unpack

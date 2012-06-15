@@ -44,13 +44,15 @@ RDEPEND="${DEPEND}
 src_unpack() {
 	unpack ${A}
 	unpack ./CAPT_Printer_Driver_for_Linux_V200_uk_EN/Src/${MY_PF}.tar.gz
-	cd ${S}
+	cd "${S}"
+}
+
+src_prepare() {
 	# Fix the cups backend path
 	for i in backend pstocapt{,2,3}/filter; do
 		sed -i -e 's@libdir@libexecdir@' "${i}/Makefile.am"
 	done
 }
-
 src_configure() {
 	cd driver
 	NOCONFIGURE=1 ./autogen.sh
@@ -86,12 +88,12 @@ src_compile() {
 src_install() {
 	for i in driver backend pstocapt{,2,3} ppd; do
 		cd ${i}
-		make install DESTDIR=${D}
+		make install DESTDIR="${D}"
 		cd ..
 	done
 	if use gtk; then
 		cd statusui
-		make install DESTDIR=${D}
+		make install DESTDIR="${D}"
 		cd ..
 	fi
 
@@ -104,7 +106,7 @@ src_install() {
 		dosym ${i} /usr/$(get_libdir)/${i%.?.?}
 		dosym ${i} /usr/$(get_libdir)/${i%.?.?.?}
 	done
-	
+
 	# Install bin
 	dobin 	libs/captdrv \
 		libs/captfilter \
@@ -125,47 +127,39 @@ src_install() {
 
 	# Install sbin
 	dosbin libs/ccpd libs/ccpdadmin
-
 	ABI=${OABI}
 
 	# Install the data
 	insinto /usr/share/ccpd
 	doins libs/ccpddata/*
-
 	insinto /usr/share/captmon
 	doins libs/captmon/msgtable.xml
-
 	insinto /usr/share/captmon2
 	doins libs/captmon2/msgtable2.xml
-
 	insinto /usr/share/captemon
 	doins libs/captemon/*.xml
-
 	insinto /usr/share/caepcm
 	doins data/CnA* libs/CnA* data/CNL*
 
 	# Install doc
-	dodoc LICENSE* README* COPYING
-
+	dodoc LICENSE* README*
 	for i in statusui driver backend pstocapt{,2,3} ppd; do
 		docinto ${i}
 		dodoc ${i}/NEWS ${i}/README ${i}/AUTHORS ${i}/ChangeLog ${i}/LICENSE*
 	done
 
-
 	# Fix the fifos
 	dodir /var/ccpd
-	mkfifo -m 600 ${D}/var/ccpd/fifo0
+	mkfifo -m 600 "${D}"/var/ccpd/fifo0
 	fowners lp:lp /var/ccpd/fifo0
-	
+
 	# fix captmon
 	dodir /var/captmon
 	fowners lp:lp /var/captmon
 	keepdir /var/captmon
 
 	# Install startupscripts
-	newinitd ${FILESDIR}/${PN}-init.d ccpd
-	
+	newinitd "${FILESDIR}"/"${PN}"-init.d ccpd
 	insinto /etc
 	doins samples/ccpd.conf
 }
@@ -185,13 +179,13 @@ pkg_postinst() {
 	einfo "Now you must register the printer in ccpd, if connected with usb"
 	einfo
 	einfo "/usr/sbin/ccpdadmin -p LBP3010 -o /dev/usb/lp0"
-	einfo 
+	einfo
 	einfo "Notice that you can't use LPT port with this driver."
-	einfo "If you have a network connection to your printer use -o net:<IP OF PRINTER>" 
+	einfo "If you have a network connection to your printer use -o net:<IP OF PRINTER>"
 	einfo "instead of -o /dev/usb/lp0"
 	einfo "See manual for more information,  guide-capt-1.3xE.tar.gz at "
 	einfo "http://software.canon-europe.com/software/0023675.asp"
-	einfo 
+	einfo
 	einfo "Now you can go ahead and start the ccpd daemon"
 	einfo
 	einfo "/etc/init.d/ccpd start"
@@ -200,7 +194,7 @@ pkg_postinst() {
 	einfo "/var/ccpd/ , increase the fifo number for more printers"
 	einfo
 	einfo "mkfifo -m 600 /var/ccpd/fifo1; chown lp:lp /var/ccpd/fifo1"
-	einfo 
+	einfo
 	einfo
 	ewarn "If you reinstall make sure the fifo is created in /var/ccpd, if not"
 	ewarn "just reinstall again. This is due to bug #136199"

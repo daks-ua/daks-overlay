@@ -1,4 +1,4 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -11,26 +11,19 @@ LICENSE="GPL-2"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="
-	app-admin/webapp-config
-"
-RDEPEND="
-	dev-db/mysql
-	dev-lang/php
-"
+DEPEND="app-admin/webapp-config"
+RDEPEND="dev-db/mysql
+	dev-lang/php"
+
 S="${WORKDIR}/${PN}"
 
 src_install() {
 
 	webapp_src_preinst
-
 	einfo "Installing files"
 	insinto "${MY_HTDOCSDIR}"
 	doins -r .
-
 	webapp_serverowned -R "${MY_HTDOCSDIR}"
-
 	webapp_postinst_txt en "${FILESDIR}"/postinstall-en.txt
-
 	webapp_src_install
 }

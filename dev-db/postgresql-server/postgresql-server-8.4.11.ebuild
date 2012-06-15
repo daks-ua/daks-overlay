@@ -6,7 +6,7 @@ EAPI="4"
 PYTHON_DEPEND="python? 2"
 
 WANT_AUTOMAKE="none"
-inherit autotools eutils multilib pam prefix python versionator
+inherit autotools eutils multilib pam prefix python user versionator
 
 SLOT="$(get_version_component_range 1-2)"
 
