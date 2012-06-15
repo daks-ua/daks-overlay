@@ -4,7 +4,7 @@
 
 EAPI="3"
 
-inherit eutils pax-utils rpm versionator
+inherit eutils pax-utils rpm user versionator
 
 DESCRIPTION="Server component of 1C ERP system"
 HOMEPAGE="http://v8.1c.ru/"

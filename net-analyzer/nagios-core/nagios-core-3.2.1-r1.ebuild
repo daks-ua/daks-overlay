@@ -1,10 +1,10 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/nagios-core/nagios-core-3.2.1.ebuild,v 1.7 2010/10/15 17:16:41 ranger Exp $
+# $Header: $
 
 EAPI="2"
 
-inherit eutils depend.apache multilib toolchain-funcs
+inherit eutils depend.apache multilib toolchain-funcs user
 
 MY_P=${PN/-core}-${PV}
 DESCRIPTION="Nagios Core - Check daemon, CGIs, docs"

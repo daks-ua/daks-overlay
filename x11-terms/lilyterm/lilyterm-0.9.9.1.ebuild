@@ -4,7 +4,7 @@
 
 EAPI=4
 
-inherit versionator autotools
+inherit versionator
 
 MY_P="${P/_/~}"
 

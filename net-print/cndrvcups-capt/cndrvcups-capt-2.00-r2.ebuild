@@ -28,9 +28,9 @@ RDEPEND="${DEPEND}
 		app-text/ghostscript-gpl
 		amd64? (
 			gtk? (
-				>=app-emulation/emul-linux-x86-gtklibs-2.0
+				app-emulation/emul-linux-x86-gtklibs
 			    )
-			>=app-emulation/emul-linux-x86-baselibs-10.0-r1
+			app-emulation/emul-linux-x86-baselibs
 			>=app-emulation/emul-linux-x86-bjdeps-0.1-r2
 		)
 		!amd64? (
