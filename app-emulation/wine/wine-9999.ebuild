@@ -1,49 +1,54 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Header: /var/cvsroot/gentoo-x86/app-emulation/wine/wine-9999.ebuild,v 1.109 2012/06/10 03:24:21 tetromino Exp $
 
-EAPI="2"
+EAPI="4"
 
-inherit eutils flag-o-matic multilib
+inherit autotools eutils flag-o-matic multilib pax-utils
 
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="git://source.winehq.org/git/wine.git"
-	inherit git autotools
-	SRC_URI=""
+	inherit git-2
+#	SRC_URI="http://dl.dropbox.com/u/6901628/raw3.patch"
+	SRC_URI="http://dl.dropbox.com/u/6901628/try16.zip"
 	#KEYWORDS=""
 else
-	AUTOTOOLS_AUTO_DEPEND="no"
-	inherit autotools
 	MY_P="${PN}-${PV/_/-}"
-	SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tar.bz2"
+	SRC_URI="mirror://sourceforge/${PN}/Source/${MY_P}.tar.bz2"
 	KEYWORDS="-* ~amd64 ~x86 ~x86-fbsd"
 	S=${WORKDIR}/${MY_P}
 fi
 
-pulse_patches() { echo "$1"/winepulse-{0.39,configure.ac-1.3.10,winecfg-1.3.11}.patch ; }
-GV="1.2.0"
+GV="1.5"
+MV="0.0.4"
 DESCRIPTION="free implementation of Windows(tm) on Unix"
 HOMEPAGE="http://www.winehq.org/"
 SRC_URI="${SRC_URI}
 	gecko? (
-		mirror://sourceforge/wine/wine_gecko-${GV}-x86.msi
-		win64? ( mirror://sourceforge/wine/wine_gecko-${GV}-x86_64.msi )
+		mirror://sourceforge/${PN}/Wine%20Gecko/${GV}/wine_gecko-${GV}-x86.msi
+		win64? ( mirror://sourceforge/${PN}/Wine%20Gecko/${GV}/wine_gecko-${GV}-x86_64.msi )
 	)
-	pulseaudio? ( `pulse_patches http://art.ified.ca/downloads/winepulse` )"
+	mono? ( mirror://sourceforge/${PN}/Wine%20Mono/${MV}/wine-mono-${MV}.msi )"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-IUSE="alsa capi cups custom-cflags dbus fontconfig +gecko gnutls gphoto2 gsm gstreamer jack jpeg lcms ldap mp3 nas ncurses nls openal +opengl +oss +perl png pulseaudio samba scanner ssl test +threads +truetype v4l +win32 +win64 +X xcomposite xinerama xml"
+IUSE="alsa capi cups custom-cflags elibc_glibc fontconfig +gecko gnutls gphoto2 gsm gstreamer hardened jpeg lcms ldap +mono mp3 ncurses nls odbc openal opencl +opengl +oss +perl png samba scanner selinux ssl test +threads +truetype udisks v4l +win32 +win64 +X xcomposite xinerama xml"
+REQUIRED_USE="elibc_glibc? ( threads )
+	mono? ( || ( win32 !win64 ) )" #286560
 RESTRICT="test" #72375
 
 MLIB_DEPS="amd64? (
 	truetype? ( >=app-emulation/emul-linux-x86-xlibs-2.1 )
 	X? (
 		>=app-emulation/emul-linux-x86-xlibs-2.1
-		>=app-emulation/emul-linux-x86-soundlibs-2.1[pulseaudio?]
+		>=app-emulation/emul-linux-x86-soundlibs-2.1
 	)
+	mp3? ( app-emulation/emul-linux-x86-soundlibs )
+	odbc? ( app-emulation/emul-linux-x86-db )
 	openal? ( app-emulation/emul-linux-x86-sdl )
 	opengl? ( app-emulation/emul-linux-x86-opengl )
+	scanner? ( app-emulation/emul-linux-x86-medialibs )
+	v4l? ( app-emulation/emul-linux-x86-medialibs )
 	app-emulation/emul-linux-x86-baselibs
 	>=sys-kernel/linux-headers-2.6
 	)"
@@ -53,9 +58,11 @@ RDEPEND="truetype? ( >=media-libs/freetype-2.0.0 media-fonts/corefonts )
 	ncurses? ( >=sys-libs/ncurses-5.2 )
 	fontconfig? ( media-libs/fontconfig )
 	gphoto2? ( media-libs/libgphoto2 )
-	jack? ( media-sound/jack-audio-connection-kit )
 	openal? ( media-libs/openal )
-	dbus? ( sys-apps/dbus )
+	udisks? (
+		sys-apps/dbus
+		sys-fs/udisks:0
+	)
 	gnutls? ( net-libs/gnutls )
 	gstreamer? ( media-libs/gstreamer media-libs/gst-plugins-base )
 	X? (
@@ -68,17 +75,18 @@ RDEPEND="truetype? ( >=media-libs/freetype-2.0.0 media-fonts/corefonts )
 	)
 	xinerama? ( x11-libs/libXinerama )
 	alsa? ( media-libs/alsa-lib )
-	nas? ( media-libs/nas )
 	cups? ( net-print/cups )
+	opencl? ( virtual/opencl )
 	opengl? ( virtual/opengl )
-	pulseaudio? ( media-sound/pulseaudio )
 	gsm? ( media-sound/gsm )
 	jpeg? ( virtual/jpeg )
 	ldap? ( net-nds/openldap )
 	lcms? ( =media-libs/lcms-1* )
 	mp3? ( >=media-sound/mpg123-1.5.0 )
 	nls? ( sys-devel/gettext )
+	odbc? ( dev-db/unixODBC )
 	samba? ( >=net-fs/samba-3.0.25 )
+	selinux? ( sec-policy/selinux-wine )
 	xml? ( dev-libs/libxml2 dev-libs/libxslt )
 	scanner? ( media-gfx/sane-backends )
 	ssl? ( dev-libs/openssl )
@@ -86,16 +94,17 @@ RDEPEND="truetype? ( >=media-libs/freetype-2.0.0 media-fonts/corefonts )
 	v4l? ( media-libs/libv4l )
 	!win64? ( ${MLIB_DEPS} )
 	win32? ( ${MLIB_DEPS} )
-	xcomposite? ( x11-libs/libXcomposite ) "
+	xcomposite? ( x11-libs/libXcomposite )"
 DEPEND="${RDEPEND}
-	pulseaudio? ( ${AUTOTOOLS_DEPEND} )
 	X? (
 		x11-proto/inputproto
 		x11-proto/xextproto
 		x11-proto/xf86vidmodeproto
 	)
 	xinerama? ( x11-proto/xineramaproto )
-	sys-devel/bison
+	!hardened? ( sys-devel/prelink )
+	virtual/pkgconfig
+	virtual/yacc
 	sys-devel/flex"
 
 src_unpack() {
@@ -104,21 +113,46 @@ src_unpack() {
 			&& die "you need gcc-4.4+ to build 64bit wine"
 	fi
 
+	if use win32 && use opencl; then
+		[[ x$(eselect opencl show) = "xintel" ]] &&
+			die "Cannot build wine[opencl,win32]: intel-ocl-sdk is 64-bit only" # 403947
+	fi
+
 	if [[ ${PV} == "9999" ]] ; then
-		git_src_unpack
+		git-2_src_unpack
+		unpack try16.zip
 	else
 		unpack ${MY_P}.tar.bz2
 	fi
 }
 
 src_prepare() {
-	if use pulseaudio ; then
-		EPATCH_OPTS=-p1 epatch `pulse_patches "${DISTDIR}"`
-		eautoreconf
-	fi
 	epatch "${FILESDIR}"/${PN}-1.1.15-winegcc.patch #260726
-	epatch "${FILESDIR}"/tanks.patch
+	epatch "${FILESDIR}"/${PN}-1.4_rc2-multilib-portage.patch #395615
+	epatch "${FILESDIR}"/${PN}-disable-dynamic-vertex-buffers.patch
+	epatch "${WORKDIR}"/0001-user32-tests-Added-DefRawInputProc-tests-try-16.patch
+	epatch "${WORKDIR}"/0002-user32-tests-Added-GetRawInputDeviceList-tests-try-1.patch
+	epatch "${WORKDIR}"/0003-user32-tests-Added-GetRawInputDeviceInfoW-tests-try-.patch
+	epatch "${WORKDIR}"/0004-user32-tests-Added-GetRawInputDeviceInfoA-tests-try-.patch
+	epatch "${WORKDIR}"/0005-user32-tests-Added-basic-GetRegisteredRawInputDevice.patch
+	epatch "${WORKDIR}"/0006-user32-tests-Added-basic-RegisterRawInputDevices-tes.patch
+	epatch "${WORKDIR}"/0007-user32-tests-Added-raw-input-device-flag-preconditio.patch
+	epatch "${WORKDIR}"/0008-user32-tests-Added-extended-RegisterRawInputDevices-.patch
+	epatch "${WORKDIR}"/0009-user32-tests-Added-basic-GetRawInputData-tests-try-1.patch
+	epatch "${WORKDIR}"/0010-user32-tests-Added-basic-GetRawInputBuffer-tests-try.patch
+	epatch "${WORKDIR}"/0011-user32-tests-Added-raw-input-simulation-tests-try-16.patch
+	epatch "${WORKDIR}"/0012-user32-Added-DefRawInputProc-implementation-try-16.patch
+	epatch "${WORKDIR}"/0013-server-user32-Added-GetRawInputDeviceList-implementa.patch
+	epatch "${WORKDIR}"/0014-server-user32-Added-GetRawInputDeviceInfoW-implement.patch
+	epatch "${WORKDIR}"/0015-user32-Added-GetRawInputDeviceInfoA-implementation-t.patch
+	epatch "${WORKDIR}"/0016-server-user32-Added-GetRegisteredRawInputDevices-imp.patch
+	epatch "${WORKDIR}"/0017-server-user32-Added-RegisterRawInputDevices-implemen.patch
+	epatch "${WORKDIR}"/0018-server-user32-Added-GetRawInputData-implementation-t.patch
+	epatch "${WORKDIR}"/0019-server-user32-Added-GetRawInputBuffer-implementation.patch
+	epatch "${WORKDIR}"/0020-server-user32-Added-RIDEV_NOLEGACY-raw-input-device-.patch
+#	epatch "${DISTDIR}"/raw3.patch
 	epatch_user #282735
+	eautoreconf
 	sed -i '/^UPDATE_DESKTOP_DATABASE/s:=.*:=true:' tools/Makefile.in || die
 	sed -i '/^MimeType/d' tools/wine.desktop || die #117785
 }
@@ -136,25 +170,24 @@ do_configure() {
 		$(use_with lcms cms) \
 		$(use_with cups) \
 		$(use_with ncurses curses) \
+		$(use_with udisks dbus) \
 		$(use_with fontconfig) \
 		$(use_with gnutls) \
 		$(use_with gphoto2 gphoto) \
 		$(use_with gsm) \
 		$(use_with gstreamer) \
 		--without-hal \
-		$(use_with jack) \
 		$(use_with jpeg) \
 		$(use_with ldap) \
 		$(use_with mp3 mpg123) \
-		$(use_with nas) \
-		$(use_with nls gettextpo) \
+		$(use_with nls gettext) \
 		$(use_with openal) \
+		$(use_with opencl) \
 		$(use_with opengl) \
 		$(use_with ssl openssl) \
 		$(use_with oss) \
 		$(use_with png) \
 		$(use_with threads pthread) \
-		$(use pulseaudio && use_with pulseaudio pulse) \
 		$(use_with scanner sane) \
 		$(use_enable test tests) \
 		$(use_with truetype freetype) \
@@ -166,10 +199,11 @@ do_configure() {
 		$(use_with xml xslt) \
 		$2
 
-	emake -j1 depend || die "depend"
+	emake -j1 depend
 
 	popd >/dev/null
 }
+
 src_configure() {
 	export LDCONFIG=/bin/true
 	use custom-cflags || strip-flags
@@ -187,7 +221,7 @@ src_compile() {
 	for b in 64 32 ; do
 		local builddir="${WORKDIR}/wine${b}"
 		[[ -d ${builddir} ]] || continue
-		emake -C "${builddir}" all || die
+		emake -C "${builddir}" all
 	done
 }
 
@@ -196,19 +230,29 @@ src_install() {
 	for b in 64 32 ; do
 		local builddir="${WORKDIR}/wine${b}"
 		[[ -d ${builddir} ]] || continue
-		emake -C "${builddir}" install DESTDIR="${D}" || die
+		emake -C "${builddir}" install DESTDIR="${D}"
 	done
 	dodoc ANNOUNCE AUTHORS README
 	if use gecko ; then
 		insinto /usr/share/wine/gecko
-		doins "${DISTDIR}"/wine_gecko-${GV}-x86.msi || die
-		use win64 && { doins "${DISTDIR}"/wine_gecko-${GV}-x86_64.msi || die ; }
+		doins "${DISTDIR}"/wine_gecko-${GV}-x86.msi
+		use win64 && doins "${DISTDIR}"/wine_gecko-${GV}-x86_64.msi
+	fi
+	if use mono ; then
+		insinto /usr/share/wine/mono
+		doins "${DISTDIR}"/wine-mono-${MV}.msi
 	fi
 	if ! use perl ; then
-		rm "${D}"/usr/bin/{wine{dump,maker},function_grep.pl} "${D}"/usr/share/man/man1/wine{dump,maker}.1 || die
+		rm "${D}"usr/bin/{wine{dump,maker},function_grep.pl} "${D}"usr/share/man/man1/wine{dump,maker}.1 || die
 	fi
-}
 
-pkg_postinst() {
-	paxctl -psmr "${ROOT}"/usr/bin/wine{,-preloader} 2>/dev/null #255055
+	if use win32 || ! use win64; then
+		pax-mark psmr "${D}"usr/bin/wine{,-preloader} #255055
+	fi
+	use win64 && pax-mark psmr "${D}"usr/bin/wine64{,-preloader}
+
+	if use win64 && ! use win32; then
+		dosym /usr/bin/wine{64,} # 404331
+		dosym /usr/bin/wine{64,}-preloader
+	fi
 }
