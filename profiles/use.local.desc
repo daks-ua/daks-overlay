@@ -1,0 +1,47 @@
+# This file is deprecated as per GLEP 56 in favor of metadata.xml. Please add
+# your descriptions to your package's metadata.xml ONLY.
+# * generated automatically using egencache *
+
+app-emulation/wine:capi - Enable ISDN support via CAPI
+app-emulation/wine:custom-cflags - Bypass strip-flags; use are your own peril
+app-emulation/wine:gecko - Add support for the Gecko engine when using iexplore
+app-emulation/wine:hal - Enable obsolete sys-apps/hal support
+app-emulation/wine:perl - Install helpers written in perl (winedump/winemaker)
+app-emulation/wine:samba - Add support for NTLM auth. see http://wiki.winehq.org/NtlmAuthSetupGuide and http://wiki.winehq.org/NtlmSigningAndSealing
+app-emulation/wine:win32 - Build a 32bit version of Wine (won't run Win64 binaries)
+app-emulation/wine:win64 - Build a 64bit version of Wine (won't run Win32 binaries)
+app-office/1C_Enterprise-server:pax_kernel - Make this package work on PAX kernels
+app-office/1C_Enterprise-ws:pax_kernel - Make this package work on PAX kernels
+dev-db/postgresql-base:1c - Apply patchset for work with 1C:Enterprise ERP system
+dev-db/postgresql-base:pg-intdatetime - Enable --enable-integer-datetimes configure option, which changes PG to use 64-bit integers for timestamp storage
+dev-db/postgresql-base:pg_legacytimestamp - Use double precision floating-point numbers instead of 64-bit integers for timestamp storage.
+dev-db/postgresql-server:1c - Apply patchset for work with 1C:Enterprise ERP system
+dev-db/postgresql-server:pg_legacytimestamp - Use double precision floating-point numbers instead of 64-bit integers for timestamp storage.
+dev-db/postgresql-server:uuid - Enable server side UUID generation (via dev-libs/ossp-uuid)
+games-strategy/x3:bonuspack - Install the bonus pack
+games-strategy/x3:cockpit - Install the cockpit mod
+games-strategy/x3:modkit - Install the modkit
+games-strategy/x3:xtm - Install the eXTended mod
+net-analyzer/nagios-core:lighttpd - install www-servers/lighttpd config
+net-analyzer/nagios-core:web - enable web interface
+net-analyzer/ocsng:admin - Install Administration server
+net-analyzer/ocsng:comm - Install Communication server
+net-analyzer/ocsng:logrotate - Install support files for app-admin/logrotate
+net-misc/haspd:demo - Install haspdemo and nethaspdemo utilities
+net-misc/haspd:lpt-hasp - Compile and install aksparlnx, module for LPT HASP driver
+net-misc/haspd:sentinel - Install SafeNet Sentinel driver
+net-misc/haspd:skey - Install Eutron Smartkey 3 USB/LPT driver
+net-misc/haspd:wine - Install HASP keys support for wine
+net-misc/italc:system-libvncserver - Enable system libvncserver instead integrated one
+sys-apps/portage:epydoc - Build html API documentation with epydoc.
+sys-apps/portage:ipc - Use inter-process communication between portage and running ebuilds.
+sys-apps/portage:pypy1_8 - Use pypy-c1.8 as Python interpreter.
+sys-apps/portage:python2 - Use python2 as Python interpreter.
+sys-apps/portage:python3 - Use python3 as Python interpreter.
+sys-block/btrfs-gui:helper-only - Install only helper for remote access to the local btrfs
+sys-boot/grub:multislot - Enable installing grub-1 and grub-2 simultaneously
+www-apps/egroupware:gallery - Add Gallery2 integration to the eGroupware
+www-apps/egroupware:jpgraph - Add jpgraph (dev-php/jpgraph) integration to the eGroupware
+www-apps/egroupware:phpfreechat - Add phpFreeChat (http://www.phpfreechat.net) integration to the eGroupware
+x11-misc/xwinmosaic:scripts - Enable scripts.
+x11-terms/lilyterm:safe-mode - Enable running LilyTerm in safe mode

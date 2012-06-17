@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install nofetch postinst postrm preinst setup
+DEPEND=kernel_linux? ( virtual/modutils ) sys-apps/sed kernel_linux? ( virtual/linux-sources )
+DESCRIPTION=Driver for the RaLink RT2870 USB wireless chipsets
+HOMEPAGE=http://www.ralinktech.com/support.php?s=2
+IUSE=debug kernel_linux
+KEYWORDS=-* ~amd64 x86
+LICENSE=GPL-2
+RDEPEND=net-wireless/wireless-tools kernel_linux? ( virtual/modutils )
+RESTRICT=bindist fetch mirror
+SLOT=0
+SRC_URI=2010_0709_RT2870_Linux_STA_v2.4.0.1.tar.bz2
+_eclasses_=eutils	7b605062b7d609ee1d0b225de9eccbe2	linux-info	cc184ad3383ffb6ffbaa82f53608e77f	linux-mod	cba6b1240fca7886fe5c7297106aea80	multilib	5782800349f728f725f9378105c6a2ab	toolchain-funcs	e575dd4d4682fc3539829c52d8382856	user	32a09e82e2f592bf88ad2fd08525166e	versionator	6601b4c5b3f019a993db59a50e1854e4
+_md5_=a06bca4fa9472c10beeacb41f063fcd5

@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install postinst prepare unpack
+DEPEND==net-print/cndrvcups-common-2.00-r2 >=net-print/cups-1.1.17
+DESCRIPTION=Canon CUPS Capt driver
+EAPI=2
+HOMEPAGE=http://www.canon.com/
+IUSE=gtk
+KEYWORDS=~amd64 ~x86
+LICENSE=CANON
+RDEPEND==net-print/cndrvcups-common-2.00-r2 >=net-print/cups-1.1.17 >=sys-apps/portage-2.1.1_pre1 app-text/ghostscript-gpl amd64? ( gtk? ( app-emulation/emul-linux-x86-gtklibs ) app-emulation/emul-linux-x86-baselibs >=app-emulation/emul-linux-x86-bjdeps-0.1-r2 ) !amd64? ( dev-libs/popt dev-libs/libxml2 ) gtk? ( x11-libs/gtk+ )
+RESTRICT=mirror
+SLOT=0
+SRC_URI=http://files.canon-europe.com/files/soft39340/software/CAPT_Printer_Driver_for_Linux_V200_uk_EN.tar.gz
+_eclasses_=eutils	7b605062b7d609ee1d0b225de9eccbe2	multilib	5782800349f728f725f9378105c6a2ab	toolchain-funcs	e575dd4d4682fc3539829c52d8382856	user	32a09e82e2f592bf88ad2fd08525166e	versionator	6601b4c5b3f019a993db59a50e1854e4
+_md5_=c666819285740ff9fd472b1b5b8ed018

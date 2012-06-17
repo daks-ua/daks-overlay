@@ -1,0 +1,10 @@
+DEFINED_PHASES=install prepare
+DESCRIPTION=Skdet is a simple program that will detect the rootkits
+EAPI=4
+HOMEPAGE=http://www.xs4all.nl/~dvgevers/skdet/
+KEYWORDS=~amd64 ~x86
+LICENSE=as-is
+SLOT=0
+SRC_URI=http://dvgevers.home.xs4all.nl/skdet/skdet-1.0.tar.bz2 http://dvgevers.home.xs4all.nl/skdet/skdet-1.0.1 http://dvgevers.home.xs4all.nl/skdet/skdet-fix-includes.diff
+_eclasses_=eutils	7b605062b7d609ee1d0b225de9eccbe2	multilib	5782800349f728f725f9378105c6a2ab	toolchain-funcs	e575dd4d4682fc3539829c52d8382856	user	32a09e82e2f592bf88ad2fd08525166e
+_md5_=311be6b5c59942b67513b4bcdee568fd

@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install prepare test unpack
+DEPEND=virtual/perl-Module-Build test? ( virtual/perl-Test-Simple ) dev-lang/perl[-build]
+DESCRIPTION=Mapping of XML entities to Unicode
+EAPI=4
+HOMEPAGE=http://search.cpan.org/dist/XML-Entities/
+IUSE=test
+KEYWORDS=~amd64
+LICENSE=|| ( Artistic GPL-1 GPL-2 GPL-3 )
+RDEPEND=dev-perl/HTML-Parser dev-lang/perl[-build]
+SLOT=0
+SRC_URI=mirror://cpan/authors/id/S/SI/SIXTEASE/XML-Entities-1.0000.tar.gz
+_eclasses_=base	5f35078c26d6c60556d5c8a2feb4f84f	eutils	7b605062b7d609ee1d0b225de9eccbe2	multilib	5782800349f728f725f9378105c6a2ab	multiprocessing	1512bdfe7004902b8cd2c466fc3df772	perl-module	1c5ba5b92574108992a6758f863da534	toolchain-funcs	e575dd4d4682fc3539829c52d8382856	user	32a09e82e2f592bf88ad2fd08525166e
+_md5_=24666a897aeab54b13bf3ec0df1c4fb2

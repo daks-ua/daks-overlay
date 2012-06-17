@@ -1,0 +1,20 @@
+Title: Re adding overlay is required
+Author: Dmitry 'daks' Fomenko <daks12@gmail.com>
+Content-Type: text/plain
+Posted: 2012-06-17
+Revision: 1
+News-Item-Format: 1.0
+
+This overlay has been added to the global list of overlays,
+accessible via layman. Everyone who added it by editing
+/etc/layman/layman.cfg please comment out added lines,
+remove the overlay and add again:
+
+# sed -e "s:http\://iglast.kh.ua/daks.hg.xml:#http\://iglast.kh.ua/daks.hg.xml:" \
+-i /etc/layman/layman.cfg
+# layman -d daks
+# layman -a daks
+
+After about two weeks http://iglast.kh.ua/daks.hg.xml file
+may become unavailable due to circumstances beyond of my control,
+so the overlay will stop working.

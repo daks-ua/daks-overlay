@@ -21,9 +21,20 @@
 ##   End example
 ##
 
-# Dmitry 'daks' Fomenko (04 Apr 2012)
-# Because an experimental stage of patch for autopatching
-=sys-apps/portage-2.2*
+# Dmitry 'daks' Fomenko (14 Jun 2012)
+# Sheduled for removal in 30 days.
+=net-analizer/nagios-core-3.2.1-r1
+=net-analizer/nagios-core-3.2.3
+=net-misc/pssh-2.2.2
+
+# Dmitry 'daks' Fomenko (14 Jun 2012)
+# Sheduled for removal in 30 days. If you need this game
+# please refer to the layman/jmbsvicetto overlay
+=games-strategy/x3-2.5.01
+
+# Dmitry 'daks' Fomenko (14 Jun 2012)
+# Ebild breaks system! Needs rewriting or remove.
+dev-db/postgresql-eter
 
 # Dmitry 'daks' Fomenko (11 Jun 2012)
 # Old ebuilds. Scheduled to remove in 30 days
@@ -32,14 +43,6 @@
 =net-misc/pssh-2.2.2
 =sys-process/ioping-0.4
 
-# Dmitry 'daks' Fomenko (14 Jun 2012)
-# Ebild breaks system! Needs rewriting or remove.
-dev-db/postgresql-eter
-
-# Dmitry 'daks' Fomenko (14 Jun 2012)
-# Sheduled for removal in 30 days. If you need this game
-# please refer to the layman/jmbsvicetto overlay
-=games-strategy/x3-2.5.01
-=net-analizer/nagios-core-3.2.1-r1
-=net-analizer/nagios-core-3.2.3
-=net-misc/pssh-2.2.2
+# Dmitry 'daks' Fomenko (04 Apr 2012)
+# Because an experimental stage of patch for autopatching
+=sys-apps/portage-2.2*

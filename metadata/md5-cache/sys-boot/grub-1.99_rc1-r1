@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare prerm unpack
+DEPEND=>=sys-libs/ncurses-5.2-r5 dev-libs/lzo truetype? ( media-libs/freetype >=media-fonts/unifont-5 ) >=sys-devel/autogen-5.10 >=dev-lang/python-2.5.2
+DESCRIPTION=GNU GRUB 2 boot loader
+EAPI=4
+HOMEPAGE=http://www.gnu.org/software/grub/
+IUSE=custom-cflags debug truetype multislot static
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3
+RDEPEND=>=sys-libs/ncurses-5.2-r5 dev-libs/lzo truetype? ( media-libs/freetype >=media-fonts/unifont-5 )
+SLOT=0
+SRC_URI=mirro://gnu/grub/grub-1.99~rc1.tar.gz mirror://gentoo/grub-1.99~rc1.tar.gz
+_eclasses_=eutils	7b605062b7d609ee1d0b225de9eccbe2	flag-o-matic	d4d85170c0ee7a80c9a7cd009ae13133	mount-boot	02dd3bb4c5f025fef0fc3ade0f27c217	multilib	5782800349f728f725f9378105c6a2ab	toolchain-funcs	e575dd4d4682fc3539829c52d8382856	user	32a09e82e2f592bf88ad2fd08525166e
+_md5_=85ee77dea43057155f2a1498f81e774d
