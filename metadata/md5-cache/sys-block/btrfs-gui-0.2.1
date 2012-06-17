@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup
+DEPEND=|| ( =dev-lang/python-3.2* =dev-lang/python-3.1* ) || ( =dev-lang/python-3.2*[tk] =dev-lang/python-3.1*[tk] )
+DESCRIPTION=Graphical user interface tool for inspecting and managing btrfs filesystems (local and remote)
+EAPI=4
+HOMEPAGE=http://carfax.org.uk/btrfs-gui
+IUSE=helper-only
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3
+RDEPEND=sys-fs/btrfs-progs || ( =dev-lang/python-3.2* =dev-lang/python-3.1* ) || ( =dev-lang/python-3.2*[tk] =dev-lang/python-3.1*[tk] )
+SLOT=0
+SRC_URI=http://carfax.org.uk/sites/default/files/btrfs-gui-v0.2.1.tar.gz
+_eclasses_=distutils	15ae23f6f8219a009bfcfff7724fe727	multilib	5782800349f728f725f9378105c6a2ab	python	4152846e243ec207de8a1b02a36f1461	toolchain-funcs	e575dd4d4682fc3539829c52d8382856
+_md5_=941c1917e8a11491d306d1b5674b7ab8

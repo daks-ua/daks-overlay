@@ -1,0 +1,14 @@
+DEFINED_PHASES=install unpack
+DEPEND=>=sys-libs/glibc-2.3 >=dev-libs/icu-3.8.1-r1 >=app-arch/rpm2targz-9.0.0.3g
+DESCRIPTION=Base component of 1C ERP system
+EAPI=3
+HOMEPAGE=http://v8.1c.ru/
+IUSE=+nls
+KEYWORDS=~amd64 ~x86
+LICENSE=1CEnterprise_en
+RDEPEND=>=sys-libs/glibc-2.3 >=dev-libs/icu-3.8.1-r1
+RESTRICT=fetch strip
+SLOT=8.2
+SRC_URI=x86? ( 1C_Enterprise82-common-8.2.13-219.i386.rpm nls? ( 1C_Enterprise82-common-nls-8.2.13-219.i386.rpm ) ) amd64? ( 1C_Enterprise82-common-8.2.13-219.x86_64.rpm nls? ( 1C_Enterprise82-common-nls-8.2.13-219.x86_64.rpm ) )
+_eclasses_=eutils	7b605062b7d609ee1d0b225de9eccbe2	flag-o-matic	d4d85170c0ee7a80c9a7cd009ae13133	multilib	5782800349f728f725f9378105c6a2ab	rpm	b94b54b44f14d6bee3e966c8f5c86fba	toolchain-funcs	e575dd4d4682fc3539829c52d8382856	user	32a09e82e2f592bf88ad2fd08525166e	versionator	6601b4c5b3f019a993db59a50e1854e4
+_md5_=308416405094117a68e04398a6c43235

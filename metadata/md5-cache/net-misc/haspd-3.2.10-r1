@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install postinst postrm preinst pretend setup unpack
+DEPEND=kernel_linux? ( virtual/modutils ) sys-apps/sed kernel_linux? ( virtual/linux-sources ) >=app-arch/rpm2targz-9.0.0.3g
+DESCRIPTION=Hardware Against Software Protection drivers and license managers
+EAPI=4
+HOMEPAGE=http://www.etersoft.ru
+IUSE=lpt-hasp sentinel skey +wine demo kernel_linux
+KEYWORDS=-* x86 amd64
+LICENSE=Proprietary
+RDEPEND=kernel_linux? ( virtual/modutils )
+SLOT=0
+SRC_URI=ftp://updates.etersoft.ru/pub/Etersoft/HASP/3.2/sources/Gentoo/2009//haspd-3.2-eter10gentoo.src.rpm
+_eclasses_=eutils	7b605062b7d609ee1d0b225de9eccbe2	linux-info	cc184ad3383ffb6ffbaa82f53608e77f	linux-mod	cba6b1240fca7886fe5c7297106aea80	multilib	5782800349f728f725f9378105c6a2ab	rpm	b94b54b44f14d6bee3e966c8f5c86fba	toolchain-funcs	e575dd4d4682fc3539829c52d8382856	user	32a09e82e2f592bf88ad2fd08525166e	versionator	6601b4c5b3f019a993db59a50e1854e4
+_md5_=d5ada4c776fec1f362448aca1f1b2289

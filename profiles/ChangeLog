@@ -6,6 +6,9 @@
 # Only typo fixes which don't affect portage/repoman behaviour could be avoided
 # here. If in doubt put a record here!
 
+  17 Jun 2012; Dmitry 'daks' Fomenko <daks12@gmail.com> +metadata/layout.conf:
+  Added for the using new hashes, regen all digests.
+
   14 Jun 2012; Dmitry 'daks' Fomenko <daks12@gmail.com> package.mask:
   games-strategy/x3-2.5.01.ebuild, nagios-core-3.2.1-r1.ebuild,
   nagios-core-3.2.3, net-misc/pssh-2.2.2.ebuild:

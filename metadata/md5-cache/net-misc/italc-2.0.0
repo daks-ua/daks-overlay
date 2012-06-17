@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile config configure install postinst prepare setup test unpack
+DEPEND=dev-libs/lzo sys-apps/tcp-wrappers virtual/jpeg sys-libs/zlib dev-libs/openssl x11-libs/qt-core x11-libs/qt-xmlpatterns xinerama? ( x11-libs/libXinerama ) X? ( x11-libs/libICE x11-libs/libSM x11-libs/libX11 x11-libs/libXdamage x11-libs/libXext x11-libs/libXfixes x11-libs/libXrandr x11-libs/libXtst x11-apps/xinput x11-libs/qt-gui:4 ) X? ( x11-proto/inputproto ) >=dev-util/cmake-2.8.4 userland_GNU? ( >=sys-apps/findutils-4.4.0 )
+DESCRIPTION=Intelligent Teaching And Learning with Computers (iTALC) supports working with computers in school
+EAPI=4
+HOMEPAGE=http://italc.sourceforge.net/
+IUSE=X +crypt xinerama
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2
+RDEPEND=dev-libs/lzo sys-apps/tcp-wrappers virtual/jpeg sys-libs/zlib dev-libs/openssl x11-libs/qt-core x11-libs/qt-xmlpatterns xinerama? ( x11-libs/libXinerama ) X? ( x11-libs/libICE x11-libs/libSM x11-libs/libX11 x11-libs/libXdamage x11-libs/libXext x11-libs/libXfixes x11-libs/libXrandr x11-libs/libXtst x11-apps/xinput x11-libs/qt-gui:4 )
+SLOT=0
+SRC_URI=mirror://sourceforge/italc/italc-2.0.0.tar.bz2
+_eclasses_=base	5f35078c26d6c60556d5c8a2feb4f84f	cmake-utils	de2b6743eb0bffee798e01b913aec936	eutils	7b605062b7d609ee1d0b225de9eccbe2	flag-o-matic	d4d85170c0ee7a80c9a7cd009ae13133	multilib	5782800349f728f725f9378105c6a2ab	toolchain-funcs	e575dd4d4682fc3539829c52d8382856	user	32a09e82e2f592bf88ad2fd08525166e
+_md5_=12fd01698e871e50a56958e9ab3fe031

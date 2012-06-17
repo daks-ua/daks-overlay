@@ -1,0 +1,9 @@
+DEFINED_PHASES=compile install setup unpack
+DESCRIPTION=32bit nls-disabled dev-libs/popt-1.13
+HOMEPAGE=http://rpm5.org/
+KEYWORDS=~amd64
+LICENSE=as-is
+SLOT=0
+SRC_URI=http://rpm5.org/files/popt/popt-1.13.tar.gz
+_eclasses_=eutils	7b605062b7d609ee1d0b225de9eccbe2	flag-o-matic	d4d85170c0ee7a80c9a7cd009ae13133	multilib	5782800349f728f725f9378105c6a2ab	toolchain-funcs	e575dd4d4682fc3539829c52d8382856	user	32a09e82e2f592bf88ad2fd08525166e
+_md5_=a753f97cf68df1db8e529429975fbde7

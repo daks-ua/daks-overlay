@@ -1,0 +1,11 @@
+DEFINED_PHASES=install unpack
+DEPEND=dev-vcs/git
+DESCRIPTION=Set of widgets for x11-wm/awesome that provide helpful information
+EAPI=3
+HOMEPAGE=https://awesome.naquadah.org/wiki/Obvious
+KEYWORDS=~amd64 ~x86
+LICENSE=MIT
+RDEPEND==x11-wm/awesome-3.4*
+SLOT=0
+_eclasses_=git-2	15733ab6a6feb34af9837b41623c2bad
+_md5_=2a3114aedfa5158acf4f7ec7dd77a9b5

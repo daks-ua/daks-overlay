@@ -1,0 +1,20 @@
+Title: Re adding overlay is required
+Author: Dmitry 'daks' Fomenko <daks12@gmail.com>
+Content-Type: text/plain
+Posted: 2012-06-17
+Revision: 1
+News-Item-Format: 1.0
+
+Оверлей добавлен в глобальный список оверлеев, доступный через layman.
+Всем, кто добавлял этот через правку /etc/layman/layman.cfg огромная
+просьба закоментировать там добавленную строчку, удалить оверлей
+и снова добавить:
+
+# sed -e "s:http\://iglast.kh.ua/daks.hg.xml:#http\://iglast.kh.ua/daks.hg.xml:" \
+-i /etc/layman/layman.cfg
+# layman -d daks
+# layman -a daks
+
+Где-то через две недели файл http://iglast.kh.ua/daks.hg.xml может
+стать недоступным по независящим от меня обстоятельствам,
+соответственно оверлей перестанет работать.
