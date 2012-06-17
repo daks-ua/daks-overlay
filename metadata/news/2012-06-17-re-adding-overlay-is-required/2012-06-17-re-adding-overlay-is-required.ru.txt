@@ -1,8 +1,8 @@
-Title: Re adding overlay is required
+Title: Необходимо передобавить (^_^) оверлей.
 Author: Dmitry 'daks' Fomenko <daks12@gmail.com>
 Content-Type: text/plain
 Posted: 2012-06-17
-Revision: 1
+Revision: 2
 News-Item-Format: 1.0
 
 Оверлей добавлен в глобальный список оверлеев, доступный через layman.
