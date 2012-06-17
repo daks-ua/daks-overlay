@@ -2,11 +2,11 @@ Title: Необходимо передобавить (^_^) оверлей.
 Author: Dmitry 'daks' Fomenko <daks12@gmail.com>
 Content-Type: text/plain
 Posted: 2012-06-17
-Revision: 2
+Revision: 3
 News-Item-Format: 1.0
 
 Оверлей добавлен в глобальный список оверлеев, доступный через layman.
-Всем, кто добавлял этот через правку /etc/layman/layman.cfg огромная
+Всем, кто добавлял этот оверлей через правку /etc/layman/layman.cfg огромная
 просьба закоментировать там добавленную строчку, удалить оверлей
 и снова добавить:
 
