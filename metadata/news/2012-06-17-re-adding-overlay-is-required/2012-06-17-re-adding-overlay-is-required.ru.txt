@@ -2,7 +2,7 @@ Title: Необходимо передобавить (^_^) оверлей.
 Author: Dmitry 'daks' Fomenko <daks12@gmail.com>
 Content-Type: text/plain
 Posted: 2012-06-17
-Revision: 3
+Revision: 4
 News-Item-Format: 1.0
 
 Оверлей добавлен в глобальный список оверлеев, доступный через layman.
@@ -10,7 +10,7 @@ News-Item-Format: 1.0
 просьба закоментировать там добавленную строчку, удалить оверлей
 и снова добавить:
 
-# sed -e "s:http\://iglast.kh.ua/daks.hg.xml:#http\://iglast.kh.ua/daks.hg.xml:" \
+# sed -e "s:^[ \t]*http\://iglast.kh.ua/daks.hg.xml:# http\://iglast.kh.ua/daks.hg.xml:" \
 -i /etc/layman/layman.cfg
 # layman -d daks
 # layman -a daks
