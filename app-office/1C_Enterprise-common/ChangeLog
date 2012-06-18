@@ -1,7 +1,16 @@
 # ChangeLog for app-office/1C_Enterprise-common
 # Copyright 2002-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*app-office/1C_Enterprise-common-8.2.15.317
+
+  18 Jun 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>,
+  +1C_Enterprise-common-8.2.15.317.ebuild,
+  -1C_Enterprise-common-8.2.15.301.ebuild:
+  Version bump, purge old ebuilds.
 
 *app-office/1C_Enterprise-common-8.2.15.310
+
   14 May 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>,
   +1C_Enterprise-common-8.2.15.310.ebuild:
   Version bump.
