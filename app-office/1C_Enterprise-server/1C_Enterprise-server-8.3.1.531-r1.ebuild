@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="3"
+EAPI="4"
 
 inherit eutils pax-utils rpm user versionator
 
@@ -10,7 +10,7 @@ DESCRIPTION="Server component of 1C ERP system"
 HOMEPAGE="http://v8.1c.ru/"
 
 MY_PV="$(replace_version_separator 3 '-' )"
-MY_PN="1C_Enterprise82-server"
+MY_PN="1C_Enterprise83-server"
 
 SRC_URI="x86? ( ${MY_PN}-${MY_PV}.i386.rpm
 	    nls? ( ${MY_PN}-nls-${MY_PV}.i386.rpm ) )
@@ -19,7 +19,7 @@ SRC_URI="x86? ( ${MY_PN}-${MY_PV}.i386.rpm
 
 SLOT="$(get_version_component_range 1-2)"
 LICENSE="1CEnterprise_en"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 RESTRICT="fetch strip"
 
 IUSE="postgres +fontconfig +nls pax_kernel"
@@ -44,6 +44,8 @@ QA_EXECSTACK="opt/1C/v8.2/i386/libociicus.so
 
 USER=usr1cv$(delete_all_version_separators ${SLOT})
 GROUP=grp1cv$(delete_all_version_separators ${SLOT})
+
+S="${WORKDIR}"
 
 pkg_setup() {
 	enewgroup ${GROUP}
