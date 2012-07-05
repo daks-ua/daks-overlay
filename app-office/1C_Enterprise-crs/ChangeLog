@@ -2,6 +2,13 @@
 # Copyright 2002-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*app-office/1C_Enterprise-crs-8.3.1.531-r1
+
+  05 Jul 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>,
+  +1C_Enterprise-crs-8.3.1.531-r1.ebuild,
+  Correcting ebuild for properly works with EAPI=4.
+  Purge old ebuilds.
+
 *app-office/1C_Enterprise-crs-8.3.1.531
 
   04 Jul 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>,
