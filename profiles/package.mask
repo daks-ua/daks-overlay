@@ -24,7 +24,7 @@
 # Dmitry 'daks' Fomenko (05 Jul 2012)
 # Not work atm! If someone able to make it work,
 # please inform me: mailto:daks12@gmail.com
-=1C_Enterprise-client-8.3.1.531.ebuild
+=1C_Enterprise-client-8.3.1.531
 
 # Dmitry 'daks' Fomenko (14 Jun 2012)
 # Sheduled for removal in 30 days.
