@@ -6,7 +6,7 @@ EAPI="4"
 
 inherit eutils pax-utils rpm user versionator
 
-DESCRIPTION="Server component of 1C ERP system"
+DESCRIPTION="Native linux client of 1C ERP system"
 HOMEPAGE="http://v8.1c.ru/"
 
 MY_PV="$(replace_version_separator 3 '-' )"
@@ -17,7 +17,7 @@ SRC_URI="x86? ( ${MY_PN}-${MY_PV}.i386.rpm
 	amd64? ( ${MY_PN}-${MY_PV}.x86_64.rpm
 	    nls? ( ${MY_PN}-nls-${MY_PV}.x86_64.rpm ) )"
 
-SLOT="$(get_version_component_range 1-2)"
+SLOT=$(get_version_component_range 1-2)
 LICENSE="1CEnterprise_en"
 KEYWORDS=""
 RESTRICT="fetch strip"
