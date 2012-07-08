@@ -4,40 +4,35 @@
 
 EAPI="4"
 
-inherit eutils pax-utils rpm user versionator
+inherit eutils flag-o-matic multilib rpm versionator
 
-DESCRIPTION="Native linux client of 1C ERP system"
+DESCRIPTION="Base component of 1C ERP system"
 HOMEPAGE="http://v8.1c.ru/"
 
 MY_PV="$(replace_version_separator 3 '-' )"
-MY_PN="1C_Enterprise83-client"
+MY_PN="1C_Enterprise83-common"
 
 SRC_URI="x86? ( ${MY_PN}-${MY_PV}.i386.rpm
 	    nls? ( ${MY_PN}-nls-${MY_PV}.i386.rpm ) )
 	amd64? ( ${MY_PN}-${MY_PV}.x86_64.rpm
 	    nls? ( ${MY_PN}-nls-${MY_PV}.x86_64.rpm ) )"
 
-SLOT=$(get_version_component_range 1-2)
+SLOT="$(get_version_component_range 1-2)"
 LICENSE="1CEnterprise_en"
 KEYWORDS=""
 RESTRICT="fetch strip"
-
 IUSE="+nls"
 
-RDEPEND="~app-office/1C_Enterprise-common-${PV}:${SLOT}
-	~app-office/1C_Enterprise-server-${PV}:${SLOT}
-	>=dev-libs/icu-4.6
-	net-libs/webkit-gtk:2
-	app-crypt/mit-krb5
-	media-gfx/imagemagick"
-
+RDEPEND=">=sys-libs/glibc-2.3
+	>=dev-libs/icu-3.8.1-r1"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}"
 
+QA_TEXTRELS="opt/1C/v${SLOT})/i386/backbas.so"
+QA_EXECSTACK="opt/1C/v${SLOT})/i386/backbas.so"
+
 src_install() {
-	dodir /opt /usr
+	dodir /opt
 	mv "${WORKDIR}"/opt/* "${D}"/opt
-	domenu "${WORKDIR}"/usr/share/applications/{1cv8,1cv8c,1cestart}.desktop
-	ln -s /usr/lib/libMagickWand.so "${D}"/opt/1C/v"${SLOT}"/i386/libWand.so
 }
