@@ -39,6 +39,6 @@ src_install() {
 	dodir /opt /usr
 	mv "${WORKDIR}"/opt/* "${D}"/opt
 	domenu "${WORKDIR}"/usr/share/applications/{1cv8,1cv8c,1cestart}.desktop
-	use x86 && dosym /usr/"${get_libdir}"/libMagickWand.so "${D}"/opt/1C/v"${SLOT}"/i386/libWand.so
-	use amd64 && dosym /usr/"${get_libdir}"/libMagickWand.so "${D}"/opt/1C/v"${SLOT}"/x86_64/libWand.so
+	use x86 && dosym /usr/"$(get_libdir)"/libMagickWand.so /opt/1C/v"${SLOT}"/i386/libWand.so
+	use amd64 && dosym /usr/"$(get_libdir)"/libMagickWand.so /opt/1C/v"${SLOT}"/x86_64/libWand.so
 }
