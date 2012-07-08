@@ -30,17 +30,18 @@ RDEPEND="~app-office/1C_Enterprise-common-${PV}:${SLOT}
 			app-text/ttf2pt1
 			media-gfx/imagemagick[corefonts]
 			dev-db/unixODBC ) "
-
 DEPEND="${RDEPEND}"
 
-QA_TEXTRELS="opt/1C/v8.2/i386/libociicus.so
-	    opt/1C/v8.2/i386/image.so
-	    opt/1C/v8.2/i386/libnnz10.so
-	    opt/1C/v8.2/i386/libclntsh.so.10.1"
+S="${WORKDIR}"
 
-QA_EXECSTACK="opt/1C/v8.2/i386/libociicus.so
-	    opt/1C/v8.2/i386/libnnz10.so
-	    opt/1C/v8.2/i386/libclntsh.so.10.1"
+QA_TEXTRELS="opt/1C/v${SLOT}/i386/libociicus.so
+	    opt/1C/v${SLOT}/i386/image.so
+	    opt/1C/v${SLOT}/i386/libnnz10.so
+	    opt/1C/v${SLOT}/i386/libclntsh.so.10.1"
+
+QA_EXECSTACK="opt/1C/v${SLOT}/i386/libociicus.so
+	    opt/1C/v${SLOT}/i386/libnnz10.so
+	    opt/1C/v${SLOT}/i386/libclntsh.so.10.1"
 
 USER=usr1cv$(delete_all_version_separators ${SLOT})
 GROUP=grp1cv$(delete_all_version_separators ${SLOT})
@@ -61,7 +62,7 @@ src_install() {
 	    )
 	    use x86 && i="i386"
 	    use amd64 && i="x86_64"
-	    cd "${WORKDIR}/opt/1C/v8.2/${i}/"
+	    cd "${WORKDIR}/opt/1C/v${SLOT}/${i}/"
 	    pax-mark m "${binaries[@]}"
 	fi
 	dodir /opt

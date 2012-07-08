@@ -23,7 +23,6 @@ IUSE="+nls"
 
 RDEPEND="~app-office/1C_Enterprise-common-${PV}:${SLOT}
 	~app-office/1C_Enterprise-server-${PV}:${SLOT}"
-
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}"
