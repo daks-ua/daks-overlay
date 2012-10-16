@@ -1,0 +1,17 @@
+@@ -, +, @@ 
+---
+ dlls/user32/winpos.c |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
+--- a/dlls/user32/winpos.c
++++ a/dlls/user32/winpos.c
+@@ -250,8 +250,7 @@ BOOL WINAPI ClientToScreen( HWND hwnd, LPPOINT lppnt )
+  */
+ BOOL WINAPI ScreenToClient( HWND hwnd, LPPOINT lppnt )
+ {
+-    MapWindowPoints( 0, hwnd, lppnt, 1 );
+-    return TRUE;
++    return MapWindowPoints( 0, hwnd, lppnt, 1 ) != 0;
+ }
+ 
+ 
+--
