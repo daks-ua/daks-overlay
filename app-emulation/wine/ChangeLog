@@ -2,6 +2,12 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+  16 Oct 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +wine-lotro.patch, -wine-disable-dynamic-vertex-buffers.patch:
+  added patch for properly working LotRO RoR update
+  (taken from the http://bugs.winehq.org/show_bug.cgi?id=31979),
+  clean old patches.
+
   15 Jun 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
   -files/tanks.patch, +wine-1.2.3-msxml3-libxml2-headers.patch,
   +wine-1.4_rc2-multilib-portage.patch, 
