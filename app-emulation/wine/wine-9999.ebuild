@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/wine/wine-9999.ebuild,v 1.109 2012/06/10 03:24:21 tetromino Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-emulation/wine/wine-9999.ebuild,v 1.115 2012/09/10 06:02:11 tetromino Exp $
 
 EAPI="4"
 
@@ -9,8 +9,7 @@ inherit autotools eutils flag-o-matic multilib pax-utils
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="git://source.winehq.org/git/wine.git"
 	inherit git-2
-#	SRC_URI="http://dl.dropbox.com/u/6901628/raw3.patch"
-	SRC_URI="http://dl.dropbox.com/u/6901628/try16.zip"
+	SRC_URI=""
 	#KEYWORDS=""
 else
 	MY_P="${PN}-${PV/_/-}"
@@ -19,8 +18,9 @@ else
 	S=${WORKDIR}/${MY_P}
 fi
 
-GV="1.5"
+GV="1.7"
 MV="0.0.4"
+PULSE_PATCH="winepulse-2012.06.15.patch"
 DESCRIPTION="free implementation of Windows(tm) on Unix"
 HOMEPAGE="http://www.winehq.org/"
 SRC_URI="${SRC_URI}
@@ -28,20 +28,22 @@ SRC_URI="${SRC_URI}
 		mirror://sourceforge/${PN}/Wine%20Gecko/${GV}/wine_gecko-${GV}-x86.msi
 		win64? ( mirror://sourceforge/${PN}/Wine%20Gecko/${GV}/wine_gecko-${GV}-x86_64.msi )
 	)
-	mono? ( mirror://sourceforge/${PN}/Wine%20Mono/${MV}/wine-mono-${MV}.msi )"
+	mono? ( mirror://sourceforge/${PN}/Wine%20Mono/${MV}/wine-mono-${MV}.msi )
+	http://source.winehq.org/patches/data/87234 -> ${PULSE_PATCH}"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-IUSE="alsa capi cups custom-cflags elibc_glibc fontconfig +gecko gnutls gphoto2 gsm gstreamer hardened jpeg lcms ldap +mono mp3 ncurses nls odbc openal opencl +opengl +oss +perl png samba scanner selinux ssl test +threads +truetype udisks v4l +win32 +win64 +X xcomposite xinerama xml"
+IUSE="alsa capi cups custom-cflags elibc_glibc fontconfig +gecko gnutls gphoto2 gsm gstreamer hardened jpeg lcms ldap +mono mp3 ncurses nls odbc openal opencl +opengl osmesa +oss +perl png pulseaudio samba scanner selinux ssl test +threads +truetype udisks v4l +win32 +win64 +X xcomposite xinerama xml"
 REQUIRED_USE="elibc_glibc? ( threads )
-	mono? ( || ( win32 !win64 ) )" #286560
+	mono? ( || ( win32 !win64 ) )
+	osmesa? ( opengl )" #286560
 RESTRICT="test" #72375
 
 MLIB_DEPS="amd64? (
 	truetype? ( >=app-emulation/emul-linux-x86-xlibs-2.1 )
 	X? (
 		>=app-emulation/emul-linux-x86-xlibs-2.1
-		>=app-emulation/emul-linux-x86-soundlibs-2.1
+		>=app-emulation/emul-linux-x86-soundlibs-2.1[pulseaudio(+)?]
 	)
 	mp3? ( app-emulation/emul-linux-x86-soundlibs )
 	odbc? ( app-emulation/emul-linux-x86-db )
@@ -61,7 +63,7 @@ RDEPEND="truetype? ( >=media-libs/freetype-2.0.0 media-fonts/corefonts )
 	openal? ( media-libs/openal )
 	udisks? (
 		sys-apps/dbus
-		sys-fs/udisks:0
+		sys-fs/udisks:2
 	)
 	gnutls? ( net-libs/gnutls )
 	gstreamer? ( media-libs/gstreamer media-libs/gst-plugins-base )
@@ -71,13 +73,15 @@ RDEPEND="truetype? ( >=media-libs/freetype-2.0.0 media-fonts/corefonts )
 		x11-libs/libXi
 		x11-libs/libXmu
 		x11-libs/libXxf86vm
-		x11-apps/xmessage
 	)
 	xinerama? ( x11-libs/libXinerama )
 	alsa? ( media-libs/alsa-lib )
 	cups? ( net-print/cups )
 	opencl? ( virtual/opencl )
-	opengl? ( virtual/opengl )
+	opengl? (
+		virtual/glu
+		virtual/opengl
+	)
 	gsm? ( media-sound/gsm )
 	jpeg? ( virtual/jpeg )
 	ldap? ( net-nds/openldap )
@@ -85,6 +89,8 @@ RDEPEND="truetype? ( >=media-libs/freetype-2.0.0 media-fonts/corefonts )
 	mp3? ( >=media-sound/mpg123-1.5.0 )
 	nls? ( sys-devel/gettext )
 	odbc? ( dev-db/unixODBC )
+	osmesa? ( media-libs/mesa[osmesa] )
+	pulseaudio? ( media-sound/pulseaudio )
 	samba? ( >=net-fs/samba-3.0.25 )
 	selinux? ( sec-policy/selinux-wine )
 	xml? ( dev-libs/libxml2 dev-libs/libxslt )
@@ -120,38 +126,23 @@ src_unpack() {
 
 	if [[ ${PV} == "9999" ]] ; then
 		git-2_src_unpack
-		unpack try16.zip
 	else
 		unpack ${MY_P}.tar.bz2
 	fi
 }
 
 src_prepare() {
+	local md5="$(md5sum server/protocol.def)"
 	epatch "${FILESDIR}"/${PN}-1.1.15-winegcc.patch #260726
 	epatch "${FILESDIR}"/${PN}-1.4_rc2-multilib-portage.patch #395615
-	epatch "${FILESDIR}"/${PN}-disable-dynamic-vertex-buffers.patch
-	epatch "${WORKDIR}"/0001-user32-tests-Added-DefRawInputProc-tests-try-16.patch
-	epatch "${WORKDIR}"/0002-user32-tests-Added-GetRawInputDeviceList-tests-try-1.patch
-	epatch "${WORKDIR}"/0003-user32-tests-Added-GetRawInputDeviceInfoW-tests-try-.patch
-	epatch "${WORKDIR}"/0004-user32-tests-Added-GetRawInputDeviceInfoA-tests-try-.patch
-	epatch "${WORKDIR}"/0005-user32-tests-Added-basic-GetRegisteredRawInputDevice.patch
-	epatch "${WORKDIR}"/0006-user32-tests-Added-basic-RegisterRawInputDevices-tes.patch
-	epatch "${WORKDIR}"/0007-user32-tests-Added-raw-input-device-flag-preconditio.patch
-	epatch "${WORKDIR}"/0008-user32-tests-Added-extended-RegisterRawInputDevices-.patch
-	epatch "${WORKDIR}"/0009-user32-tests-Added-basic-GetRawInputData-tests-try-1.patch
-	epatch "${WORKDIR}"/0010-user32-tests-Added-basic-GetRawInputBuffer-tests-try.patch
-	epatch "${WORKDIR}"/0011-user32-tests-Added-raw-input-simulation-tests-try-16.patch
-	epatch "${WORKDIR}"/0012-user32-Added-DefRawInputProc-implementation-try-16.patch
-	epatch "${WORKDIR}"/0013-server-user32-Added-GetRawInputDeviceList-implementa.patch
-	epatch "${WORKDIR}"/0014-server-user32-Added-GetRawInputDeviceInfoW-implement.patch
-	epatch "${WORKDIR}"/0015-user32-Added-GetRawInputDeviceInfoA-implementation-t.patch
-	epatch "${WORKDIR}"/0016-server-user32-Added-GetRegisteredRawInputDevices-imp.patch
-	epatch "${WORKDIR}"/0017-server-user32-Added-RegisterRawInputDevices-implemen.patch
-	epatch "${WORKDIR}"/0018-server-user32-Added-GetRawInputData-implementation-t.patch
-	epatch "${WORKDIR}"/0019-server-user32-Added-GetRawInputBuffer-implementation.patch
-	epatch "${WORKDIR}"/0020-server-user32-Added-RIDEV_NOLEGACY-raw-input-device-.patch
-#	epatch "${DISTDIR}"/raw3.patch
+	epatch "${FILESDIR}"/${PN}-1.5.11-osmesa-check.patch #429386
+	epatch "${DISTDIR}/${PULSE_PATCH}" #421365
 	epatch_user #282735
+	epatch "${FILESDIR}"/${PN}-lotro.patch #winehq 31979
+	if [[ "$(md5sum server/protocol.def)" != "${md5}" ]]; then
+		einfo "server/protocol.def was patched; running tools/make_requests"
+		tools/make_requests || die #432348
+	fi
 	eautoreconf
 	sed -i '/^UPDATE_DESKTOP_DATABASE/s:=.*:=true:' tools/Makefile.in || die
 	sed -i '/^MimeType/d' tools/wine.desktop || die #117785
@@ -161,6 +152,12 @@ do_configure() {
 	local builddir="${WORKDIR}/wine$1"
 	mkdir -p "${builddir}"
 	pushd "${builddir}" >/dev/null
+
+	with_osmesa=$(use_with osmesa)
+	if use osmesa && use amd64 && [[ $1 = 32 ]]; then #430268
+		elog "win32 osmesa support is disabled for now, see bug #430268"
+		with_osmesa=--without-osmesa
+	fi
 
 	ECONF_SOURCE=${S} \
 	econf \
@@ -185,9 +182,11 @@ do_configure() {
 		$(use_with opencl) \
 		$(use_with opengl) \
 		$(use_with ssl openssl) \
+		${with_osmesa} \
 		$(use_with oss) \
 		$(use_with png) \
 		$(use_with threads pthread) \
+		$(use_with pulseaudio pulse) \
 		$(use_with scanner sane) \
 		$(use_enable test tests) \
 		$(use_with truetype freetype) \
