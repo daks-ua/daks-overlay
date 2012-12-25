@@ -5,11 +5,13 @@
 *app-office/1C_Enterprise-server-8.2.16.368
 *app-office/1C_Enterprise-server-8.2.17.143
 *app-office/1C_Enterprise-server-8.2.17.153
+*app-office/1C_Enterprise-server-8.3.2.172
 
   25 Dec 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>,
   +1C_Enterprise-server-8.2.16.368.ebuild,
   +1C_Enterprise-server-8.2.17.143.ebuild,
-  +1C_Enterprise-server-8.2.17.153.ebuild:
+  +1C_Enterprise-server-8.2.17.153.ebuild,
+  +1C_Enterprise-server-8.3.2.172.ebuild:
   Version bump.
 
 *app-office/1C_Enterprise-server-8.3.1.531-r2
