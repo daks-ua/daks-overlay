@@ -272,6 +272,16 @@ pkg_config() {
 		einfo "  Tests not supported on this OS (yet)"
 	else
 		if [[ -z ${SKIP_SYSTEM_TESTS} ]] ; then
+			if use 1c; then
+				einfo "Checking whether kernel.shmmax >= 134217728..."
+					if [[ $(sysctl -n kernel.shmmax) -le 134217728 ]] ; then
+						ewarn "The value kernel.shmmax is to low for 1C:Enterprise works properly."
+						ewarn "It should not be less than 134217728"
+						ewarn "You may need to increase the value of the kernel.shmall"
+						ewarn "    variable up to the 134217728 too"
+					fi
+			fi
+
 			einfo "Checking whether your system supports at least ${PG_MAX_CONNECTIONS} connections..."
 
 			local SEMMSL=$(sysctl -n kernel.sem | cut -f1)
