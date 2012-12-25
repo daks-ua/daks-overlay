@@ -1,0 +1,58 @@
+diff -Naur postgresql-8.4.11/contrib/Makefile postgresql-8.4.11_new/contrib/Makefile
+--- postgresql-8.4.11/contrib/Makefile	2012-12-25 16:30:12.000000000 +0200
++++ postgresql-8.4.11_new/contrib/Makefile	2012-12-25 16:47:55.852157000 +0200
+@@ -36,7 +36,10 @@
+ 		spi		\
+ 		tablefunc	\
+ 		test_parser	\
+-		tsearch2
++		tsearch2	\
++		mchar		\
++		fulleq		\
++		fasttrun
+ 
+ ifeq ($(with_openssl),yes)
+ WANTED_DIRS += sslinfo
+diff -Naur postgresql-8.4.11/src/backend/libpq/pg_hba.conf.sample postgresql-8.4.11_new/src/backend/libpq/pg_hba.conf.sample
+--- postgresql-8.4.11/src/backend/libpq/pg_hba.conf.sample	2012-02-24 00:59:21.000000000 +0200
++++ postgresql-8.4.11_new/src/backend/libpq/pg_hba.conf.sample	2012-12-25 16:49:37.453157000 +0200
+@@ -69,6 +69,7 @@
+ @remove-line-for-nolocal@# "local" is for Unix domain socket connections only
+ @remove-line-for-nolocal@local   all         all                               @authmethod@
+ # IPv4 local connections:
+-host    all         all         127.0.0.1/32          @authmethod@
++#host    all         all         127.0.0.1/32          @authmethod@
+ # IPv6 local connections:
+-host    all         all         ::1/128               @authmethod@
++#host    all         all         ::1/128               @authmethod@
++host    all         all         0.0.0.0/0              md5
+diff -Naur postgresql-8.4.11/src/backend/utils/misc/postgresql.conf.sample postgresql-8.4.11_new/src/backend/utils/misc/postgresql.conf.sample
+--- postgresql-8.4.11/src/backend/utils/misc/postgresql.conf.sample	2012-12-25 16:30:12.000000000 +0200
++++ postgresql-8.4.11_new/src/backend/utils/misc/postgresql.conf.sample	2012-12-25 16:51:28.677157000 +0200
+@@ -56,7 +56,7 @@
+ 
+ # - Connection Settings -
+ 
+-#listen_addresses = 'localhost'		# what IP address(es) to listen on;
++listen_addresses = '*'			# what IP address(es) to listen on;
+ 					# comma-separated list of addresses;
+ 					# defaults to 'localhost', '*' = all
+ 					# (change requires restart)
+@@ -204,7 +204,7 @@
+ #cpu_tuple_cost = 0.01			# same scale as above
+ #cpu_index_tuple_cost = 0.005		# same scale as above
+ #cpu_operator_cost = 0.0025		# same scale as above
+-#effective_cache_size = 128MB
++effective_cache_size = 512MB
+ 
+ # - Genetic Query Optimizer -
+ 
+@@ -466,7 +466,7 @@
+ #------------------------------------------------------------------------------
+ 
+ #deadlock_timeout = 1s
+-#max_locks_per_transaction = 64		# min 10
++max_locks_per_transaction = 150		# min 10
+ 					# (change requires restart)
+ # Note:  Each lock table slot uses ~270 bytes of shared memory, and there are
+ # max_locks_per_transaction * (max_connections + max_prepared_transactions)
