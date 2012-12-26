@@ -2,7 +2,13 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v3
 # $Header: $
 
-*postgresql-server-8.4.11 (14 May 2012)
+*postgresql-server-9.1.2 (26 Dec 2012)
+
+  26 Dec  2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +postgresql-server-9.1.2.ebuild:
+  Bump version.
+
+*postgresql-server-8.4.11-r1 (25 May 2012)
 
   25 Dec  2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
   -postgresql-server-8.4.11.ebuild,
