@@ -1,0 +1,15 @@
+# ChangeLog for games-rpg/pylotro
+# Copyright 2013 Gentoo Foundation; Distributed under the GPL v3
+# $Header: $
+
+*games-rpg/pylotro-0.2.0 (18 Dec 2013)
+
+  18 Dec 2013; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +pylotro-0.2.0.ebuild:
+  Bump version.
+
+*games-rpg/pylotro-0.1.15-r1 (9 Aug 2012)
+
+  9 Aug 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +pylotro-0.1.15-r1.ebuild, +ChangeLog, +metadata.xml:
+  added from #302337. Source URI corrected.
