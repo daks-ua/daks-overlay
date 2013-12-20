@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -67,7 +67,7 @@ PDEPEND="doc? ( ~dev-db/postgresql-docs-${PV} )"
 src_prepare() {
 	epatch "${WORKDIR}/autoconf.patch" "${WORKDIR}/base.patch" \
 		"${WORKDIR}/bool.patch" "${WORKDIR}/darwin.patch" \
-		"${WORKDIR}/relax_ssl_perms.patch" "${WORKDIR}/SuperH.patch" \
+		"${WORKDIR}/relax_ssl_perms.patch" "${WORKDIR}/SuperH.patch"
 
 	eprefixify src/include/pg_config_manual.h
 

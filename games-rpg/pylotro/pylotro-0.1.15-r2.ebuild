@@ -4,23 +4,24 @@
 
 EAPI="5"
 
-PYTHON_COMPAT=( python{2_6,2_7,3_2,3_3} )
+PYTHON_COMPAT=( python{2_6,2_7} )
 
 inherit games distutils-r1
 
 DESCRIPTION="Lord of the Rings Online and Dungeons & Dragons Online Launcher"
-HOMEPAGE="http://www.lotro.com http://http://sny.name/LOTRO/"
-SRC_URI="https://github.com/Lynx3d/pylotro/archive/master.zip -> ${P}.zip"
+HOMEPAGE="http://www.lotrolinux.com/"
+#SRC_URI="http://www.lotrolinux.com/PyLotRO-${PV}.zip"
+SRC_URI="https://dl.dropbox.com/s/skbofnhzy5tcenc/PyLotRO-${PV}.zip"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="dev-python/PyQt4[webkit,${PYTHON_USEDEP}]"
+DEPEND="dev-python/PyQt4"
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${PN}-master"
+S="${WORKDIR}/PyLotRO"
 
 python_install() {
 	distutils-r1_python_install \

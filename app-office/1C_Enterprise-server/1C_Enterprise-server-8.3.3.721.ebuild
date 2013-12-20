@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -43,7 +43,6 @@ QA_TEXTRELS_amd64="opt/1C/v${SLOT}/x86_64/libociicus.so
 	    opt/1C/v${SLOT}/x86_64/image.so
 	    opt/1C/v${SLOT}/x86_64/libnnz10.so
 	    opt/1C/v${SLOT}/x86_64/libclntsh.so.10.1"
-
 
 QA_EXECSTACK_x86="opt/1C/v${SLOT}/i386/libociicus.so
 	    opt/1C/v${SLOT}/i386/libnnz10.so
