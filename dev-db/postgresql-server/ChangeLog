@@ -1,21 +1,27 @@
 # ChangeLog for dev-db/postgresql-server
-# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v3
+# Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v3
 # $Header: $
+
+*postgresql-server-9.2.4-r2 (21 Dec 2013)
+
+  21 Dec 2013; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +postgresql-server-9.2.4-r2.ebuild:
+  Bump version.
 
 *postgresql-server-9.1.2 (26 Dec 2012)
 
-  26 Dec  2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  26 Dec 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
   +postgresql-server-9.1.2.ebuild:
   Bump version.
 
 *postgresql-server-8.4.11-r1 (25 May 2012)
 
-  25 Dec  2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  25 Dec 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
   -postgresql-server-8.4.11.ebuild,
   +postgresql-server-8.4.11-r1.ebuild:
   Add missing 1c_misc-pg8.4.patch file.
 
-  14 Jun  2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  14 Jun 2012; Dmitry 'daks' Fomenko <daks12@gmail.com>
   postgresql-server-9.0.7.ebuild:
   Fix some repoman complaints.
 
