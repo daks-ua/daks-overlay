@@ -1,4 +1,4 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -11,7 +11,7 @@ DESCRIPTION="Real Media Player"
 HOMEPAGE="http://www.real.com/ http://player.helixcommunity.org/"
 SRC_URI="http://forms.real.com/real/player/download.html?f=unix/RealPlayer11GOLD.rpm"
 RESTRICT="mirror strip test"
-LICENSE="HBRL"
+LICENSE="RPSL"
 SLOT="0"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="X nsplugin"
