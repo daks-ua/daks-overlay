@@ -2,10 +2,11 @@
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
-*postgresql-docs-9.2.4-r2 (26 Dec 2013)
+*postgresql-docs-9.2.4-r2 (21 Dec 2013)
+*postgresql-docs-9.1.9-r2 (21 Dec 2013)
 
   21 Dec 2013; Dmitry 'daks' Fomenko <daks12@gmail.com>
-  +postgresql-docs-9.2.4-r2.ebuild:
+  +postgresql-docs-9.2.4-r2.ebuild, +postgresql-docs-9.1.9-r2.ebuild:
   Added from official tree.
 
 *postgresql-docs-9.1.2 (26 Dec 2012)
