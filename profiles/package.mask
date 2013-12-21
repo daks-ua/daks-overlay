@@ -24,7 +24,9 @@
 # Dmitry 'daks' Fomenko (21 Dec 2013)
 # The evaluation version, not suitable for production.
 =dev-db/postgresql-base-9.2.4-r2
+=dev-db/postgresql-base-9.1.9-r2
 =dev-db/postgresql-server-9.2.4-r2
+=dev-db/postgresql-server-9.1.9-r2
 
 # Dmitry 'daks' Fomenko (05 Jul 2012)
 # Not work atm! If someone able to make it work,

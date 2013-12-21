@@ -3,10 +3,11 @@
 # $Header: $
 
 *postgresql-base-9.2.4-r2 (21 Dec 2013)
+*postgresql-base-9.1.9-r2 (21 Dec 2013)
 
   21 Dec 2013; Dmitry 'daks' Fomenko <daks12@gmail.com>
-  +postgresql-base-9.2.4-r2.ebuild:
-  Bump version.
+  +postgresql-base-9.2.4-r2.ebuild, +postgresql-base-9.1.9-r2.ebuild:
+  Bump versions.
 
 *postgresql-base-9.1.2 (26 Dec 2012)
 
