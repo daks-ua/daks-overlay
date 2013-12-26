@@ -17,14 +17,15 @@ SRC_URI="x86? ( ${MY_PN}-${MY_PV}.i386.rpm
 
 SLOT="$(get_version_component_range 1-2)"
 LICENSE="1CEnterprise_en"
-KEYWORDS=""
+KEYWORDS="~x86"  # x86 only
 RESTRICT="fetch strip"
 IUSE="+nls"
 
 RDEPEND="~app-office/1C_Enterprise-common-${PV}:${SLOT}
 	~app-office/1C_Enterprise-server-${PV}:${SLOT}"
-
 DEPEND="${RDEPEND}"
+
+S=${WORKDIR}
 
 src_install() {
 	dodir /opt

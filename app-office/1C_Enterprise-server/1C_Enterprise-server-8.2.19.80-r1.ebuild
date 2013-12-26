@@ -30,8 +30,9 @@ RDEPEND="~app-office/1C_Enterprise-common-${PV}:${SLOT}
 			app-text/ttf2pt1
 			media-gfx/imagemagick[corefonts]
 			dev-db/unixODBC ) "
-
 DEPEND="${RDEPEND}"
+
+S=${WORKDIR}
 
 QA_TEXTRELS="opt/1C/v8.2/i386/libociicus.so
 	    opt/1C/v8.2/i386/image.so
@@ -78,7 +79,7 @@ pkg_postinst() {
 		    elog "/opt/1C/v${SLOT}/x86_64/utils/config_server /path/to/font/dir/corefonts"
 		fi
 	fi
-	if use postgresql ; then
+	if use postgres ; then
 		elog "Perhaps you should add locale en_US in /etc/localegen and"
 		elog "regenerate locales to use 1C with postgres."
 	fi
