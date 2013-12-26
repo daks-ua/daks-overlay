@@ -24,8 +24,9 @@ IUSE="+nls"
 
 RDEPEND=">=sys-libs/glibc-2.3
 	>=dev-libs/icu-3.8.1-r1"
-
 DEPEND="${RDEPEND}"
+
+S=${WORKDIR}
 
 QA_TEXTRELS="opt/1C/v8.2/i386/backbas.so"
 QA_EXECSTACK="opt/1C/v8.2/i386/backbas.so"
