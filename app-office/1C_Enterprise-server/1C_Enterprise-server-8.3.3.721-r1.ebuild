@@ -1,8 +1,8 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="3"
+EAPI="5"
 
 inherit eutils pax-utils rpm user versionator
 
@@ -10,7 +10,7 @@ DESCRIPTION="Server component of 1C ERP system"
 HOMEPAGE="http://v8.1c.ru/"
 
 MY_PV="$(replace_version_separator 3 '-' )"
-MY_PN="1C_Enterprise82-server"
+MY_PN="1C_Enterprise83-server"
 
 SRC_URI="x86? ( ${MY_PN}-${MY_PV}.i386.rpm
 	    nls? ( ${MY_PN}-nls-${MY_PV}.i386.rpm ) )
@@ -30,17 +30,27 @@ RDEPEND="~app-office/1C_Enterprise-common-${PV}:${SLOT}
 			app-text/ttf2pt1
 			media-gfx/imagemagick[corefonts]
 			dev-db/unixODBC ) "
-
 DEPEND="${RDEPEND}"
 
-QA_TEXTRELS="opt/1C/v8.2/i386/libociicus.so
-	    opt/1C/v8.2/i386/image.so
-	    opt/1C/v8.2/i386/libnnz10.so
-	    opt/1C/v8.2/i386/libclntsh.so.10.1"
+S="${WORKDIR}"
 
-QA_EXECSTACK="opt/1C/v8.2/i386/libociicus.so
-	    opt/1C/v8.2/i386/libnnz10.so
-	    opt/1C/v8.2/i386/libclntsh.so.10.1"
+QA_TEXTRELS_x86="opt/1C/v${SLOT}/i386/libociicus.so
+	    opt/1C/v${SLOT}/i386/image.so
+	    opt/1C/v${SLOT}/i386/libnnz10.so
+	    opt/1C/v${SLOT}/i386/libclntsh.so.10.1"
+
+QA_TEXTRELS_amd64="opt/1C/v${SLOT}/x86_64/libociicus.so
+	    opt/1C/v${SLOT}/x86_64/image.so
+	    opt/1C/v${SLOT}/x86_64/libnnz10.so
+	    opt/1C/v${SLOT}/x86_64/libclntsh.so.10.1"
+
+QA_EXECSTACK_x86="opt/1C/v${SLOT}/i386/libociicus.so
+	    opt/1C/v${SLOT}/i386/libnnz10.so
+	    opt/1C/v${SLOT}/i386/libclntsh.so.10.1"
+
+QA_EXECSTACK_amd64="opt/1C/v${SLOT}/x86_64/libociicus.so
+	    opt/1C/v${SLOT}/x86_64/libnnz10.so
+	    opt/1C/v${SLOT}/x86_64/libclntsh.so.10.1"
 
 USER=usr1cv$(delete_all_version_separators ${SLOT})
 GROUP=grp1cv$(delete_all_version_separators ${SLOT})
@@ -61,7 +71,7 @@ src_install() {
 	    )
 	    use x86 && i="i386"
 	    use amd64 && i="x86_64"
-	    cd "${WORKDIR}/opt/1C/v8.2/${i}/"
+	    cd "${WORKDIR}/opt/1C/v${SLOT}/${i}/"
 	    pax-mark m "${binaries[@]}"
 	fi
 	dodir /opt
@@ -78,7 +88,7 @@ pkg_postinst() {
 		    elog "/opt/1C/v${SLOT}/x86_64/utils/config_server /path/to/font/dir/corefonts"
 		fi
 	fi
-	if use postgresql ; then
+	if use postgres ; then
 		elog "Perhaps you should add locale en_US in /etc/localegen and"
 		elog "regenerate locales to use 1C with postgres."
 	fi
