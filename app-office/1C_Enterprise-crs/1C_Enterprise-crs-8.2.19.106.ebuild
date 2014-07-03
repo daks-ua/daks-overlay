@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -13,11 +13,11 @@ MY_PV="$(replace_version_separator 3 '-' )"
 MY_PN="1C_Enterprise82-crs"
 
 SRC_URI="x86? ( ${MY_PN}-${MY_PV}.i386.rpm
-	    nls? ( ${MY_PN}-nls-${MY_PV}.i386.rpm ) )"
+	nls? ( ${MY_PN}-nls-${MY_PV}.i386.rpm ) )"
 
 SLOT="$(get_version_component_range 1-2)"
 LICENSE="1CEnterprise_en"
-KEYWORDS="~x86"  # x86 only
+KEYWORDS=""
 RESTRICT="fetch strip"
 IUSE="+nls"
 
@@ -25,7 +25,7 @@ RDEPEND="~app-office/1C_Enterprise-common-${PV}:${SLOT}
 	~app-office/1C_Enterprise-server-${PV}:${SLOT}"
 DEPEND="${RDEPEND}"
 
-S=${WORKDIR}
+S="${WORKDIR}"
 
 src_install() {
 	dodir /opt

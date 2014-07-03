@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -51,7 +51,19 @@ S="${WORKDIR}"
 src_install() {
 	dodir /opt /usr
 	mv "${WORKDIR}"/opt/* "${D}"/opt
+	local res
+	for res in 16 22 24 32 36 48 64 72 96 128 192 256; do
+		for icon in 1cestart 1cv8 1cv8c 1cv8s; do
+			newicon -s ${res} "${WORKDIR}/usr/share/icons/hicolor/${res}x${res}/apps/${icon}.png" "${icon}.png"
+		done
+	done
+
+
 	domenu "${WORKDIR}"/usr/share/applications/{1cv8,1cv8c,1cestart}.desktop
 	use x86 && dosym /usr/"$(get_libdir)"/libMagickWand.so /opt/1C/v"${SLOT}"/i386/libWand.so
 	use amd64 && dosym /usr/"$(get_libdir)"/libMagickWand.so /opt/1C/v"${SLOT}"/x86_64/libWand.so
 }
+
+pkg_preinst() { gnome2_icon_savelist; }
+pkg_postinst() { gnome2_icon_cache_update; fdo-mime_desktop_database_update; }
+pkg_postrm() { gnome2_icon_cache_update; fdo-mime_desktop_database_update; }
