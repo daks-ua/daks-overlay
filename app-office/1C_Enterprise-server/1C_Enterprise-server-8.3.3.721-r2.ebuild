@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -10,7 +10,15 @@ DESCRIPTION="Server component of 1C ERP system"
 HOMEPAGE="http://v8.1c.ru/"
 
 MY_PV="$(replace_version_separator 3 '-' )"
-MY_PN="1C_Enterprise82-server"
+MY_PN="1C_Enterprise83-server"
+MY_VERSION="$(delete_all_version_separators ${SLOT})"
+MY_USER="usr1cv${MY_VERSION}"
+MY_GROUP="grp1cv${MY_VERSION}"
+if use x86 ; then
+    MY_LIBDIR="i386"
+elif use amd64 ; then
+    MY_LIBDIR="x86_64"
+fi
 
 SRC_URI="x86? ( ${MY_PN}-${MY_PV}.i386.rpm
 	    nls? ( ${MY_PN}-nls-${MY_PV}.i386.rpm ) )
@@ -32,52 +40,45 @@ RDEPEND="~app-office/1C_Enterprise-common-${PV}:${SLOT}
 			dev-db/unixODBC ) "
 DEPEND="${RDEPEND}"
 
-S=${WORKDIR}
+S="${WORKDIR}"
 
-QA_TEXTRELS="opt/1C/v8.2/i386/libociicus.so
-	    opt/1C/v8.2/i386/image.so
-	    opt/1C/v8.2/i386/libnnz10.so
-	    opt/1C/v8.2/i386/libclntsh.so.10.1"
+QA_TEXTRELS="opt/1C/v${SLOT}/${MY_LIBDIR}/libociicus.so
+	    opt/1C/v${SLOT}/${MY_LIBDIR}/libnnz10.so
+	    opt/1C/v${SLOT}/${MY_LIBDIR}/libclntsh.so.10.1"
 
-QA_EXECSTACK="opt/1C/v8.2/i386/libociicus.so
-	    opt/1C/v8.2/i386/libnnz10.so
-	    opt/1C/v8.2/i386/libclntsh.so.10.1"
-
-USER=usr1cv$(delete_all_version_separators ${SLOT})
-GROUP=grp1cv$(delete_all_version_separators ${SLOT})
+QA_EXECSTACK="opt/1C/v${SLOT}/${MY_LIBDIR}/libociicus.so
+	    opt/1C/v${SLOT}/${MY_LIBDIR}/libnnz10.so
+	    opt/1C/v${SLOT}/${MY_LIBDIR}/libclntsh.so.10.1"
 
 pkg_setup() {
-	enewgroup ${GROUP}
-	enewuser ${USER} -1 /bin/bash /home/${USER} ${GROUP}
-	chown -R :${GROUP} /home/${USER}
+	enewgroup "${MY_GROUP}"
+	enewuser "${MY_USER}" -1 "/bin/bash" "/home/${MY_USER}" "${MY_GROUP}"
+	chown -R ":${MY_GROUP}" "/home/${MY_USER}"
+}
+
+src_prepare() {
+	epatch "${FILESDIR}/init.d.patch"
 }
 
 src_install() {
 	if use pax_kernel; then
-	    local i
 	    local binaries=(
 		rphost
 		ragent
 		rmngr
 	    )
-	    use x86 && i="i386"
-	    use amd64 && i="x86_64"
-	    cd "${WORKDIR}/opt/1C/v8.2/${i}/"
+	    cd "${WORKDIR}/opt/1C/v${SLOT}/${MY_LIBDIR}/"
 	    pax-mark m "${binaries[@]}"
 	fi
 	dodir /opt
 	mv "${WORKDIR}"/opt/* "${D}"/opt
-	doinitd "${WORKDIR}"/etc/init.d/srv1cv$(delete_all_version_separators ${SLOT})
+	doinitd "${WORKDIR}/etc/init.d/srv1cv${MY_VERSION}"
 }
 
 pkg_postinst() {
 	if use fontconfig ; then
 		elog "You can config fonts for 1C ERP system by exec"
-		if use x86 ; then
-		    elog "/opt/1C/v${SLOT}/i386/utils/config_server /path/to/font/dir/corefonts"
-		elif use amd64 ; then
-		    elog "/opt/1C/v${SLOT}/x86_64/utils/config_server /path/to/font/dir/corefonts"
-		fi
+		elog "/opt/1C/v${SLOT}/${MY_LIBDIR}/utils/config_server /path/to/font/dir/corefonts"
 	fi
 	if use postgres ; then
 		elog "Perhaps you should add locale en_US in /etc/localegen and"

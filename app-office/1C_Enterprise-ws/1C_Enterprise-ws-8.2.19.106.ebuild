@@ -25,7 +25,7 @@ IUSE="+nls pax_kernel"
 RDEPEND="~app-office/1C_Enterprise-common-${PV}:${SLOT}"
 DEPEND="${RDEPEND}"
 
-S=${WORKDIR}
+S="${WORKDIR}"
 
 src_install() {
 	dodir /opt
