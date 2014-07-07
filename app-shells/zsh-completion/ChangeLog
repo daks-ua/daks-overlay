@@ -2,6 +2,12 @@
 # Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+* zsh-completion-99999999-r3 (07 Jul 2014)
+
+  07 Jul 2014; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +zsh-completion-99999999-r3.ebuild, -zsh-completion-99999999-r2.ebuild:
+  Correcting ebuild.
+
 * zsh-completion-99999999-r2 (03 Jun 2014)
 
   03 Jun 2014; Dmitry 'daks' Fomenko <daks12@gmail.com>
