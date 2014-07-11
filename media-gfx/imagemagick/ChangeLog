@@ -1,0 +1,10 @@
+# ChangeLog for media-gfx/imagemagick
+# Copyright 2002-2014 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*media-gfx/imagemagick-6.7.9.9.ebuild (11 Jul 2014)
+
+  11 Jul 2014; Dmitry 'daks' Fomenko <daks12@gmail.com>,
+  +media-gfx/imagemagick-6.7.9.9.ebuild, +metadata.xml,
+  +Changelog:
+  Ebuild for <1C_Enterprise-client-8.3.5.

@@ -29,7 +29,7 @@ RDEPEND="~app-office/1C_Enterprise-common-${PV}:${SLOT}
 	>=dev-libs/icu-4.6
 	net-libs/webkit-gtk:2
 	app-crypt/mit-krb5
-	media-gfx/imagemagick
+	<media-gfx/imagemagick-6.8
 	net-print/cups
 	x11-libs/libSM
 	dev-libs/atk
