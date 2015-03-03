@@ -6,6 +6,10 @@
 # Only typo fixes which don't affect portage/repoman behaviour could be avoided
 # here. If in doubt put a record here!
 
+  03 Mar 2015; Dmitry 'daks' Fomenko <daks12@gmail.com> package.mask:
+  Mask 1C Enterprise suite version 8.3.6.1608 as this version is marked
+  'for testing only' by vendor.
+
   17 Jun 2012; Dmitry 'daks' Fomenko <daks12@gmail.com> +metadata/layout.conf:
   Added for the using new hashes, regen all digests.
 

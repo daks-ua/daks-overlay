@@ -1,6 +1,16 @@
 # ChangeLog for app-office/1C_Enterprise-crs
-# Copyright 2002-2014 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 2002-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+*1C_Enterprise-crs-8.3.6.1804 (03 Mar 2105)
+*1C_Enterprise-crs-8.3.5.1460 (03 Mar 2105)
+*1C_Enterprise-crs-8.2.19.130 (03 Mar 2105)
+
+  03 Mar 2015; Dmitry 'daks' Fomenko <daks12@gmail.com>,
+  +1C_Enterprise-crs-8.3.6.1804.ebuild,
+  +1C_Enterprise-crs-8.3.5.1460.ebuild,
+  +1C_Enterprise-crs-8.2.19.130.ebuild:
+  Version bump.
 
 *1C_Enterprise-crs-8.3.5.1068 (11 Jul 2104)
 
@@ -8,17 +18,17 @@
   +1C_Enterprise-crs-8.3.5.1068.ebuild:
   Bump version.
 
-*1C_Enterprise-common-8.2.19.106 (01 Jul 2104)
-*1C_Enterprise-common-8.3.3.721-r1 (01 Jul 2014)
-*1C_Enterprise-common-8.3.4.496 (01 Jul 2104)
+*1C_Enterprise-crs-8.2.19.106 (01 Jul 2104)
+*1C_Enterprise-crs-8.3.3.721-r1 (01 Jul 2014)
+*1C_Enterprise-crs-8.3.4.496 (01 Jul 2104)
 
   01 Jul 2014; Dmitry 'daks' Fomenko <daks12@gmail.com>,
-  +1C_Enterprise-common-8.2.19.106.ebuild,
-  +1C_Enterprise-common-8.3.3.721-r1.ebuild,
-  +1C_Enterprise-common-8.3.4.496.ebuild,
-  -1C_Enterprise-common-8.2.19.80-r1.ebuild,
-  -1C_Enterprise-common-8.3.3.721.ebuild,
-  -1C_Enterprise-common-8.3.4.365.ebuild:
+  +1C_Enterprise-crs-8.2.19.106.ebuild,
+  +1C_Enterprise-crs-8.3.3.721-r1.ebuild,
+  +1C_Enterprise-crs-8.3.4.496.ebuild,
+  -1C_Enterprise-crs-8.2.19.80-r1.ebuild,
+  -1C_Enterprise-crs-8.3.3.721.ebuild,
+  -1C_Enterprise-crs-8.3.4.365.ebuild:
   Update ebuilds version, purge old ebuilds.
 
   26 Dec 2013; Dmitry 'daks' Fomenko <daks12@gmail.com>,
