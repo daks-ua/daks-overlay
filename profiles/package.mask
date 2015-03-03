@@ -21,6 +21,15 @@
 ##   End example
 ##
 
+# Dmitry 'daks' Fomenko (03 Mar 2015)
+# Mask 1C ERP suite ver. 8.3.6.1804 as it is marked
+# 'for testing purposes only' by vendor.
+=app-office/1C_Enterprise-client-8.3.6.1804
+=app-office/1C_Enterprise-common-8.3.6.1804
+=app-office/1C_Enterprise-crs-8.3.6.1804
+=app-office/1C_Enterprise-server-8.3.6.1804
+=app-office/1C_Enterprise-ws-8.3.6.1804
+
 # Dmitry 'daks' Fomenko (21 Dec 2013)
 # The evaluation version, not suitable for production.
 =dev-db/postgresql-base-9.2.4-r2
