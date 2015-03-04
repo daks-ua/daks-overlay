@@ -1,6 +1,12 @@
 # ChangeLog for sys-block/iscsitarget
-# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+*iscsitarget-1.4.20.2_p20140617 (03 Mar 2015)
+
+  03 Mar 2015; Dmitriy 'daks' Fomenko <daks12@gmail.com>
+  +iscsitarget-1.4.20.2_p20140617.ebuild:
+  Fix patch for 3.13 kernels.
 
 *iscsitarget-1.4.20.2_p20140603 (03 Jun 2014)
 
