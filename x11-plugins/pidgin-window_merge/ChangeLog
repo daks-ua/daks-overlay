@@ -1,7 +1,12 @@
 # ChangeLog for x11-plugins/pidgin-window_merge
-# Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
+*pidgin-window_merge-0.2_p20130511 (03 Mar 2015)
+
+  03 Mar 2015; Dmitry 'daks' Fomenko daks12@gmail.com
+  +pidgin-window_merge-0.3_p20130511.ebuild:
+  Version bump.
 
 *pidgin-window_merge-0.2_p20121111 (16 Mar 2013)
 
