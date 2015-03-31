@@ -1,6 +1,13 @@
 # ChangeLog for dev-perl/DBD-XBase
-# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
+
+*DBD-XBase-1.05 (31 Mar 2015)
+
+  31 Mar 2015; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +DBD-XBase-1.05.ebuild, +DBD-XBase-1.03-r1.ebuild,
+  -DBD-XBase-1.03.ebuild:
+  Version bump, updated EAPI version.
 
 *DBD-XBase-1.03 (18 Jun 2011)
 
