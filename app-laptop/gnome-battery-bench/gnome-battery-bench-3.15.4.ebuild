@@ -17,9 +17,11 @@ KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd ~x86-fr
 IUSE=""
 
 RDEPEND="
-        app-text/asciidoc
-        app-text/xmlto
+	sys-power/powertop
+	app-text/asciidoc
+	app-text/xmlto
 "
+
 DEPEND="${RDEPEND}
-        virtual/pkgconfig
+	virtual/pkgconfig
 "
