@@ -6,7 +6,7 @@ EAPI=5
 GCONF_DEBUG="no"
 WANT_AUTOCONF="2.5"
 
-inherit autotools eutils gnome2
+inherit autotools eutils gnome2 linux-info
 
 DESCRIPTION="Utility for measuring power usage."
 HOMEPAGE="https://git.gnome.org/browse/gnome-battery-bench/"
@@ -17,11 +17,12 @@ KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd ~x86-fr
 IUSE=""
 
 RDEPEND="
-	sys-power/powertop
-	app-text/asciidoc
-	app-text/xmlto
+        app-text/asciidoc
+        app-text/xmlto
+"
+DEPEND="${RDEPEND}
+        virtual/pkgconfig
 "
 
-DEPEND="${RDEPEND}
-	virtual/pkgconfig
-"
+CONFIG_CHECK="INPUT_UINPUT"
+ERROR_INPUT_UINPUT="${P} requires user level driver support for input subsystem (CONFIG_INPUT_UINPUT) to be ENABLED"
