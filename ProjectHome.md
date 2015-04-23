@@ -1,0 +1,1 @@
+Some useful ebuilds. Includes 1C-Predpriyatie and postgres with patches for work with 1C.
