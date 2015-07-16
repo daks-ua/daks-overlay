@@ -1,0 +1,9 @@
+# ChangeLog for media-sound/peyote
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*peyote-0.9.12 (16 Jul 2015)
+
+  16 Jul 2015; Dmytro 'daks' Fomenko <daks12@gmail.com> +metadata.xml,
+  +peyote-0.9.12.ebuild:
+  Initial import from SourceForge.
