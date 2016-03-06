@@ -1,0 +1,10 @@
+# ChangeLog for net-misc/ike
+# Copyright 2016 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+* ike-2.2.1
+
+  06 Mar 2016; Dmitry 'daks' Fomenko <daks12@gmail.com>
+  +ike-2.2.1.ebuild, +metadata.xml, +files/iked, +files/ike.desktop,
+  +files/iked.service, +files/iked.confd, +ChangeLog:
+  Initial ebuild.

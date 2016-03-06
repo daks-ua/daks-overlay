@@ -1,0 +1,11 @@
+# IKED_LOG specifies the log file for ike daemon.
+#IKED_LOG="/var/log/iked.log"
+
+# Log level
+#IKED_LOG_LEVEL="5"
+
+# PID file for ike daemon
+#IKED_PID_FILE="/run/iked.pid"
+
+# Configuration file for ike daemon
+#IKED_CONF_FILE="/etc/ike/iked.conf"

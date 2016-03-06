@@ -1,0 +1,24 @@
+#!/sbin/runscript
+# Copyright 2016 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License, v2 or later
+# $Id$
+
+depend() {
+	need net
+}
+
+start() {
+	ebegin "Starting ike daemon"
+	start-stop-daemon --start --background --stdout var/log/iked --exec /usr/sbin/iked --name iked -- \
+	    -p ${IKED_PID_FILE:=/run/iked.pid}\
+	    -f ${IKED_CONF_FILE:=/etc/ike/iked.conf}\
+	    -l ${IKED_LOG:=/var/log/iked.log}\
+	    -d ${IKED_LOG_LEVEL:=0}
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping ike daemon"
+	start-stop-daemon --stop --exec /usr/sbin/iked --name iked
+	eend $?
+}
